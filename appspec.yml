@@ -4,7 +4,7 @@ os: linux
 
 files:
   - source:  /
-    destination: /home/ubuntu/trandy_server/service
+    destination: /home/ubuntu/trandy_server/source
     overwrite: yes
 
 permissions:

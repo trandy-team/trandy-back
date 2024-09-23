@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 PROJECT_ROOT="/home/ubuntu/trandy_server"
-JAR_FILE="$PROJECT_ROOT/build/libs/fittv-api-service-1.0.0-SNAPSHOT.jar"
 
 APP_LOG="$PROJECT_ROOT/deploy_logs/application.log"
 ERROR_LOG="$PROJECT_ROOT/deploy_logs/error.log"
