@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @OpenAPIDefinition(
-        info = @io.swagger.v3.oas.annotations.info.Info(title = "AI API 명세서", description = "AI API 명세서", version = "v1")
+        info = @io.swagger.v3.oas.annotations.info.Info(title = "Trandy API 명세서", description = "Trandy API 명세서", version = "v1")
 )
 public class SwaggerConfig {
     // http://localhost:8080/swagger-ui/index.html#/
