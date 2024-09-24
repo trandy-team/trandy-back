@@ -18,17 +18,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     private final MemberRepository memberRepository;
     @Override
-    public UserDetails loadUserByUsername(String memberId) throws UsernameNotFoundException {
-        Member member = memberRepository.findByMemberIdAndDeletedFalse(memberId)
-                .orElseThrow(() -> new CustomException(ExceptionStatus.MemberNotFoundException));
-
-        return new UserDetailsImpl(member);
-    }
-
-    public UserDetails loadUserByEmail(String email) {
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+//        Member member = memberRepository.findByMemberIdAndDeletedFalse(memberId)
+//                .orElseThrow(() -> new CustomException(ExceptionStatus.MemberNotFoundException));
         Member member = memberRepository.findByEmailAndDeletedFalse(email)
                 .orElseThrow(() -> new CustomException(ExceptionStatus.MemberNotFoundException));
-
         return new UserDetailsImpl(member);
     }
 }

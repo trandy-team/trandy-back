@@ -72,7 +72,7 @@ public class MemberService {
     public ResponseDto login(HttpServletRequest httpServletRequest,
                              HttpServletResponse httpServletResponse,
                              MemberAuthRequest request) {
-        Member member = findByMemberIdAndDeletedFalse(request.getMemberId());
+        Member member = findByEmailAndDeletedFalse(request.getEmail());
 
         // password Check
         PasswordEncoderUtil.checkPassword(request.getPassword(), member.getPassword());
@@ -162,7 +162,7 @@ public class MemberService {
 
     @Transactional
     public ResponseDto delete(MemberAuthRequest request) {
-        Member member = memberRepository.findByMemberId(request.getMemberId())
+        Member member = memberRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new CustomException(ExceptionStatus.MemberNotFoundException));
 
         // password Check
@@ -173,8 +173,8 @@ public class MemberService {
         return ResponseDto.success(Constants.API_RESPONSE_SUCCESSED);
     }
 
-    public Member findByMemberIdAndDeletedFalse(String memberId){
-        Member member = memberRepository.findByMemberIdAndDeletedFalse(memberId)
+    public Member findByEmailAndDeletedFalse(String memberId){
+        Member member = memberRepository.findByEmailAndDeletedFalse(memberId)
                 .orElseThrow(() -> new CustomException(ExceptionStatus.MemberNotFoundException));
 
         return member;

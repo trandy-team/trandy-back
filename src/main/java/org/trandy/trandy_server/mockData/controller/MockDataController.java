@@ -14,6 +14,8 @@ import org.trandy.trandy_server.member.repository.MemberRepository;
 import org.trandy.trandy_server.util.PasswordEncoderUtil;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/mockdata")
@@ -24,15 +26,31 @@ public class MockDataController {
     @PostMapping("/createMockData")
     public ResponseEntity<ResponseDto> createMockData(){
         try{
-            memberRepository.save(Member.builder()
-                            .email("skehrhks@naver.com")
-                            .password(PasswordEncoderUtil.encodePassword("123123"))
-                            .nickname("admin")
-                            .memberRole(Role.ADMIN)
-                            .grade(Grade.DIAMOND)
-                            .deleted(Constants.DELETED_NOT)
-                            .deletedAt(LocalDateTime.now())
+            List<Member> members = new ArrayList<>();
+
+            // Admin 계정
+            members.add(Member.builder()
+                    .email("admin@naver.com")
+                    .password(PasswordEncoderUtil.encodePassword("123123!"))
+                    .nickname("superuser")
+                    .memberRole(Role.ADMIN)
+                    .grade(Grade.DIAMOND)
+                    .deleted(Constants.DELETED_NOT)
+                    .deletedAt(LocalDateTime.now())
                     .build());
+
+            // 일반 계정
+            members.add(Member.builder()
+                    .email("trandy@naver.com")
+                    .password(PasswordEncoderUtil.encodePassword("123123!"))
+                    .nickname("superuser")
+                    .memberRole(Role.USER)
+                    .grade(Grade.BRONZE)
+                    .deleted(Constants.DELETED_NOT)
+                    .deletedAt(LocalDateTime.now())
+                    .build());
+
+            memberRepository.saveAll(members);
 
         }catch (Exception e){
             throw new RuntimeException("목데이터 생성 중 오류 발생");

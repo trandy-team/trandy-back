@@ -105,7 +105,7 @@ public class JwtTokenProvider {
 
     // 유저 정보가 들어간 인증 객체 생성
     public Authentication createAuthentication(String email) {
-        UserDetails userDetails = userDetailsService.loadUserByEmail(email);
+        UserDetails userDetails = userDetailsService.loadUserByUsername(email);
         return new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
     }
 

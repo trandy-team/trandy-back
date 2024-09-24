@@ -14,19 +14,19 @@ public class MemberCreateRequest {
 //    @NotNull
 //    private String memberId;
 
-    @Schema(description = "이메일", example = "abc@naver.com")
+    @Schema(description = "이메일", example = "trandy@naver.com")
     @Pattern(regexp = "^[_a-z0-9-]+(.[_a-z0-9-]+)*@(?:\\w+\\.)+\\w+$"
             ,message = "이메일 형식이 유효하지 않습니다.")
     @NotNull
     private String email;
 
-    @Schema(description = "회원 패스워드", example = "password123!")
+    @Schema(description = "회원 패스워드", example = "123123!")
     @Size(min = 8, message = "비밀번호는 최소 8자 이상이어야 합니다.")
     @NotNull
     private String password;
 
-    @Schema(description = "닉네임", example = "아무개")
-    @Size(max = 8, message = "닉네임은 최소 20자 이하여야 합니다.")
+    @Schema(description = "닉네임", example = "trandyuser")
+    @Size(min = 8, max = 20, message = "닉네임은 8 ~ 20 자 입니다.")
     @NotNull
     private String nickname;
 
