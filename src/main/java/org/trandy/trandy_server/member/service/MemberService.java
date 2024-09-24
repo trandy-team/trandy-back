@@ -43,7 +43,7 @@ public class MemberService {
 
     @Transactional
     public ResponseDto signup(MemberCreateRequest request) {
-        memberRepository.findByMemberIdAndDeletedFalse(request.getMemberId()).ifPresent(member -> {
+        memberRepository.findByEmailAndDeletedFalse(request.getEmail()).ifPresent(member -> {
             throw new CustomException(ExceptionStatus.MemberIdDuplicatedException);
         });
 
@@ -87,7 +87,7 @@ public class MemberService {
     public void setAccessTokenToHttpHeader(Member member,
                                            HttpServletResponse response){
         try{
-            String accessToken = jwtTokenProvider.createToken(member.getMemberId(), member.getMemberRole(), TokenType.ACCESS);
+            String accessToken = jwtTokenProvider.createToken(member.getEmail(), member.getMemberRole(), TokenType.ACCESS);
 
             System.out.println(accessToken);
 
@@ -146,19 +146,19 @@ public class MemberService {
         }
     }
 
-    @Transactional
-    public ResponseDto update(MemberUpdateRequest request) {
-        Member member = findByMemberIdAndDeletedFalse(request.getMemberId());
-
-        // password Check
-        PasswordEncoderUtil.checkPassword(request.getPassword(), member.getPassword());
-
-        member.update(request);
-
-        memberRepository.save(member);
-
-        return ResponseDto.success(Constants.API_RESPONSE_SUCCESSED);
-    }
+//    @Transactional
+//    public ResponseDto update(MemberUpdateRequest request) {
+//        Member member = findByMemberIdAndDeletedFalse(request.getMemberId());
+//
+//        // password Check
+//        PasswordEncoderUtil.checkPassword(request.getPassword(), member.getPassword());
+//
+//        member.update(request);
+//
+//        memberRepository.save(member);
+//
+//        return ResponseDto.success(Constants.API_RESPONSE_SUCCESSED);
+//    }
 
     @Transactional
     public ResponseDto delete(MemberAuthRequest request) {

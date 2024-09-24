@@ -50,13 +50,13 @@ public class JwtTokenProvider {
         this.key = Keys.hmacShaKeyFor(keyBytes);
     }
 
-    public String createToken(String memberId, Role role, TokenType tokenType){
+    public String createToken(String email, Role role, TokenType tokenType){
         Date date = new Date();
         long time = tokenType == TokenType.ACCESS ? Constants.ACCESS_TOKEN_TIME : Constants.REFRESH_TOKEN_TIME;
 
         return Constants.Bearer_PREFIX +
                 Jwts.builder()
-                        .setSubject(memberId)
+                        .setSubject(email)
                         .claim(Constants.AUTHORIZATION_KEY, role)
                         .setExpiration(new Date(date.getTime() + time))
                         .setIssuedAt(date)
@@ -104,8 +104,8 @@ public class JwtTokenProvider {
     }
 
     // 유저 정보가 들어간 인증 객체 생성
-    public Authentication createAuthentication(String memberId) {
-        UserDetails userDetails = userDetailsService.loadUserByUsername(memberId);
+    public Authentication createAuthentication(String email) {
+        UserDetails userDetails = userDetailsService.loadUserByEmail(email);
         return new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
     }
 

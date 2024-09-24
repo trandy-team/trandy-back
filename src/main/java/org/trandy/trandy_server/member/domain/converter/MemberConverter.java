@@ -16,17 +16,16 @@ public class MemberConverter {
 
     public MemberInfoResponse convertEntityToDto(Member member){
         return MemberInfoResponse.builder()
-                .memberId(member.getMemberId())
+                .email(member.getEmail())
                 .build();
     }
 
     public Member convertDtoToEntity(MemberCreateRequest request) {
         return Member.builder()
-                .memberId(request.getMemberId())
-                .password(PasswordEncoderUtil.encodePassword(request.getPassword()))
-                .memberName(request.getMemberName())
-                .memberRole(Role.ADMIN.getRole().equals(request.getMemberRole()) ? Role.ADMIN : Role.USER)
                 .email(request.getEmail())
+                .password(PasswordEncoderUtil.encodePassword(request.getPassword()))
+                .nickname(request.getNickname())
+                .memberRole(Role.ADMIN.getRole().equals(request.getMemberRole()) ? Role.ADMIN : Role.USER)
                 .deleted(Constants.DELETED_NOT)
                 .build();
     }

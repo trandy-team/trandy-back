@@ -20,20 +20,25 @@ public class Member extends BaseTimeEntity {
     private Long id;
 
     @Column(nullable = false)
+    private String email;
+
+    @Column(nullable = false)
     private String password;
 
     @Column(nullable = false)
-    private String memberId;
+    private String nickname;
 
-    @Column(nullable = false)
-    private String memberName;
+    private String profileImageUrl;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Role memberRole;
 
+    private long score;
+
     @Column(nullable = false)
-    private String email;
+    @Enumerated(EnumType.STRING)
+    private Grade grade;
 
     @Column(nullable = false)
     private Boolean deleted;
@@ -41,13 +46,11 @@ public class Member extends BaseTimeEntity {
     @Column
     private LocalDateTime deletedAt;
 
-    public void update(MemberUpdateRequest request){
-        this.password = request.getPassword();
-        this.memberId = request.getMemberId();
-        this.memberName = request.getMemberName();
-        this.memberRole = Role.ADMIN.getRole().equals(request.getMemberRole()) ? Role.ADMIN : Role.USER;
-        this.email = request.getEmail();
-    }
+//    public void update(MemberUpdateRequest request){
+//        this.password = request.getPassword();
+//        this.memberRole = Role.ADMIN.getRole().equals(request.getMemberRole()) ? Role.ADMIN : Role.USER;
+//        this.email = request.getEmail();
+//    }
 
     public void delete(Boolean deletedFlag){
         this.deleted = !deletedFlag;

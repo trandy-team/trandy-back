@@ -24,4 +24,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
         return new UserDetailsImpl(member);
     }
+
+    public UserDetails loadUserByEmail(String email) {
+        Member member = memberRepository.findByEmailAndDeletedFalse(email)
+                .orElseThrow(() -> new CustomException(ExceptionStatus.MemberNotFoundException));
+
+        return new UserDetailsImpl(member);
+    }
 }

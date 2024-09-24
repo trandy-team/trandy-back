@@ -8,5 +8,5 @@ import lombok.Getter;
 @AllArgsConstructor
 @Builder
 public class MemberInfoResponse {
-    private String memberId;
+    private String email;
 }

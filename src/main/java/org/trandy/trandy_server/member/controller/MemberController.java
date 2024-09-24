@@ -79,13 +79,13 @@ public class MemberController {
         return ResponseEntity.ok(memberService.find());
     }
 
-    @Operation(summary = "유저 정보 수정", description = "유저 정보 수정")
-    @ApiResponse(responseCode = "200", description = "SUCCESSED")
-    @PutMapping("/update")
-    public ResponseEntity<ResponseDto> update(@Valid @RequestBody MemberUpdateRequest request) {
-        Log.objectInfo(request);
-        return ResponseEntity.ok(memberService.update(request));
-    }
+//    @Operation(summary = "유저 정보 수정", description = "유저 정보 수정")
+//    @ApiResponse(responseCode = "200", description = "SUCCESSED")
+//    @PutMapping("/update")
+//    public ResponseEntity<ResponseDto> update(@Valid @RequestBody MemberUpdateRequest request) {
+//        Log.objectInfo(request);
+//        return ResponseEntity.ok(memberService.update(request));
+//    }
 
     @Operation(summary = "유저 정보 삭제", description = "delete 플래그 true || false 로 변경")
     @ApiResponse(responseCode = "200", description = "SUCCESSED")
