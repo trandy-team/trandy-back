@@ -36,7 +36,6 @@ public class MockDataController {
                     .memberRole(Role.ADMIN)
                     .grade(Grade.DIAMOND)
                     .deleted(Constants.DELETED_NOT)
-                    .deletedAt(LocalDateTime.now())
                     .build());
 
             // 일반 계정
@@ -47,7 +46,6 @@ public class MockDataController {
                     .memberRole(Role.USER)
                     .grade(Grade.BRONZE)
                     .deleted(Constants.DELETED_NOT)
-                    .deletedAt(LocalDateTime.now())
                     .build());
 
             memberRepository.saveAll(members);

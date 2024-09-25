@@ -14,7 +14,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 public class LoggingAspect {
     private final Logger logger = LoggerFactory.getLogger(LoggingAspect.class);
 
-    @Before("execution(* org.trandy.trandy_server..*controller.*.*(..))")
+    @Before("execution(* org.trandy.trandy_server..controller.*.*(..))")
     public void logBeforeControllerMethods(JoinPoint joinPoint) {
         String methodName = joinPoint.getSignature().getName();
         String className = joinPoint.getTarget().getClass().getName();

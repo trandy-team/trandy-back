@@ -7,8 +7,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.trandy.trandy_server.vote.domain.Post;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -45,6 +48,9 @@ public class Member extends BaseTimeEntity {
 
     @Column
     private LocalDateTime deletedAt;
+
+    @OneToMany(mappedBy = "member")
+    private List<Post> posts = new ArrayList<>();
 
 //    public void update(MemberUpdateRequest request){
 //        this.password = request.getPassword();
