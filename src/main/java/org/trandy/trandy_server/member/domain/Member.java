@@ -2,13 +2,12 @@ package org.trandy.trandy_server.member.domain;
 
 import org.hibernate.annotations.SQLRestriction;
 import org.trandy.trandy_server.common.BaseTimeEntity;
-import org.trandy.trandy_server.member.domain.dto.request.MemberUpdateRequest;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.trandy.trandy_server.vote.domain.Post;
+import org.trandy.trandy_server.post.domain.Post;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

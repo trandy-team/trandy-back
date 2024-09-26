@@ -1,4 +1,4 @@
-package org.trandy.trandy_server.vote.controller;
+package org.trandy.trandy_server.post.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.trandy.trandy_server.common.Constants;
 import org.trandy.trandy_server.common.ResponseDto;
-import org.trandy.trandy_server.vote.service.PostService;
+import org.trandy.trandy_server.post.service.PostService;
 
 @RestController
 @RequestMapping("/api/post")

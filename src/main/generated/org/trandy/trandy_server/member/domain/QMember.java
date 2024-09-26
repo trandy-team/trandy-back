@@ -44,7 +44,7 @@ public class QMember extends EntityPathBase<Member> {
 
     public final StringPath password = createString("password");
 
-    public final ListPath<org.trandy.trandy_server.vote.domain.Post, org.trandy.trandy_server.vote.domain.QPost> posts = this.<org.trandy.trandy_server.vote.domain.Post, org.trandy.trandy_server.vote.domain.QPost>createList("posts", org.trandy.trandy_server.vote.domain.Post.class, org.trandy.trandy_server.vote.domain.QPost.class, PathInits.DIRECT2);
+    public final ListPath<org.trandy.trandy_server.post.domain.Post, org.trandy.trandy_server.post.domain.QPost> posts = this.<org.trandy.trandy_server.post.domain.Post, org.trandy.trandy_server.post.domain.QPost>createList("posts", org.trandy.trandy_server.post.domain.Post.class, org.trandy.trandy_server.post.domain.QPost.class, PathInits.DIRECT2);
 
     public final StringPath profileImageUrl = createString("profileImageUrl");
 
