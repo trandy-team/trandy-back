@@ -25,7 +25,14 @@ public enum ExceptionStatus {
     TokenNeedReIssueException("TokenNeedReIssueException", HttpStatus.SEE_OTHER, "액세스 토큰이 만료되었습니다. 재발급 해주세요."),
     InValidAccessTokenException("InValidAccessTokenException", HttpStatus.BAD_REQUEST, "액세스 토큰이 유효하지 않습니다."),
     AccessTokenCreateFailedException("AccessTokenCreateFailedException", HttpStatus.BAD_REQUEST, "액세스 토큰 발급 실패"),
-    RefreshTokenCreateFailedException("RefreshTokenCreateFailedException", HttpStatus.BAD_REQUEST, "리프레시 토큰 발급 실패");
+    RefreshTokenCreateFailedException("RefreshTokenCreateFailedException", HttpStatus.BAD_REQUEST, "리프레시 토큰 발급 실패"),
+
+    // Category
+    CategoryNameIsDuplicatedException("CategoryNameIsDuplicatedException", HttpStatus.BAD_REQUEST, "이미 존재하는 카테고리 입니다. (삭제된 카테고리 포함)"),
+
+    // DB
+    DataNotFoundException("DataNotFoundException", HttpStatus.BAD_REQUEST, "데이터가 존재하지 않습니다.");
+
     private final String exceptionName;
     private final HttpStatus statusCode;
     private final String errorMessage;

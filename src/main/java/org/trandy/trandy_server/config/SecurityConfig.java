@@ -1,5 +1,6 @@
 package org.trandy.trandy_server.config;
 
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.trandy.trandy_server.common.jwt.JwtAuthFilter;
 import org.trandy.trandy_server.common.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +19,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
+@EnableMethodSecurity(securedEnabled = true)
 public class SecurityConfig {
 
     private final JwtTokenProvider jwtTokenProvider;

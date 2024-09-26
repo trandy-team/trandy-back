@@ -26,7 +26,6 @@ public class MemberConverter {
                 .password(PasswordEncoderUtil.encodePassword(request.getPassword()))
                 .nickname(request.getNickname())
                 .memberRole(Role.ADMIN.getRole().equals(request.getMemberRole()) ? Role.ADMIN : Role.USER)
-                .deleted(Constants.DELETED_NOT)
                 .build();
     }
 }

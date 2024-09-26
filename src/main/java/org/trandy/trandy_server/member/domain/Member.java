@@ -1,5 +1,6 @@
 package org.trandy.trandy_server.member.domain;
 
+import org.hibernate.annotations.SQLRestriction;
 import org.trandy.trandy_server.common.BaseTimeEntity;
 import org.trandy.trandy_server.member.domain.dto.request.MemberUpdateRequest;
 import jakarta.persistence.*;
@@ -17,6 +18,7 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@SQLRestriction("deleted = false")
 @Builder
 public class Member extends BaseTimeEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,23 +45,23 @@ public class Member extends BaseTimeEntity {
     @Enumerated(EnumType.STRING)
     private Grade grade;
 
-    @Column(nullable = false)
-    private Boolean deleted;
-
-    @Column
-    private LocalDateTime deletedAt;
-
     @OneToMany(mappedBy = "member")
     private List<Post> posts = new ArrayList<>();
 
-//    public void update(MemberUpdateRequest request){
-//        this.password = request.getPassword();
-//        this.memberRole = Role.ADMIN.getRole().equals(request.getMemberRole()) ? Role.ADMIN : Role.USER;
-//        this.email = request.getEmail();
-//    }
+    @Column(nullable = false)
+    @Builder.Default()
+    private Boolean deleted = false;
+
+    @Column
+    private LocalDateTime deletedAt;
 
     public void delete(Boolean deletedFlag){
         this.deleted = !deletedFlag;
         this.deletedAt = LocalDateTime.now();
     }
+//    public void update(MemberUpdateRequest request){
+//        this.password = request.getPassword();
+//        this.memberRole = Role.ADMIN.getRole().equals(request.getMemberRole()) ? Role.ADMIN : Role.USER;
+//        this.email = request.getEmail();
+//    }
 }

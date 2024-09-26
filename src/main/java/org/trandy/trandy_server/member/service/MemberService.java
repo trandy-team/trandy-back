@@ -43,7 +43,7 @@ public class MemberService {
 
     @Transactional
     public ResponseDto signup(MemberCreateRequest request) {
-        memberRepository.findByEmailAndDeletedFalse(request.getEmail()).ifPresent(member -> {
+        memberRepository.findByEmail(request.getEmail()).ifPresent(member -> {
             throw new CustomException(ExceptionStatus.MemberIdDuplicatedException);
         });
 
@@ -174,7 +174,7 @@ public class MemberService {
     }
 
     public Member findByEmailAndDeletedFalse(String memberId){
-        Member member = memberRepository.findByEmailAndDeletedFalse(memberId)
+        Member member = memberRepository.findByEmail(memberId)
                 .orElseThrow(() -> new CustomException(ExceptionStatus.MemberNotFoundException));
 
         return member;

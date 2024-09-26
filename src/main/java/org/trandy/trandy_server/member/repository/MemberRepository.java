@@ -10,6 +10,5 @@ import java.util.Optional;
 // Query Method 사용 시 등록한다.
 @Repository
 public interface MemberRepository extends JpaRepository<Member, Long>, QueryMemberRepository {
-    Optional<Member> findByEmailAndDeletedFalse(String memberId);
     Optional<Member> findByEmail(String memberId);
 }
