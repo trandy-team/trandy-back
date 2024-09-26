@@ -25,7 +25,7 @@ public class CategoryService {
     }
 
     public ResponseDto retrieveCategories(String categoryName) {
-        if(categoryName != null || !categoryName.isEmpty()){
+        if(categoryName != null && !categoryName.isEmpty()){
             Category category = categoryRepository.findByCategoryName(categoryName).orElseThrow(
                     () -> new CustomException(ExceptionStatus.DataNotFoundException));
             return ResponseDto.success(category);
