@@ -45,10 +45,11 @@ public class Member extends BaseTimeEntity {
     private Grade grade;
 
     @OneToMany(mappedBy = "member")
+    @Builder.Default
     private List<Post> posts = new ArrayList<>();
 
     @Column(nullable = false)
-    @Builder.Default()
+    @Builder.Default
     private Boolean deleted = false;
 
     @Column

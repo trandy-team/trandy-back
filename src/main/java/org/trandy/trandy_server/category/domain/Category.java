@@ -7,7 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.SQLRestriction;
 import org.trandy.trandy_server.common.BaseTimeEntity;
-import org.trandy.trandy_server.member.domain.Member;
+import org.trandy.trandy_server.post.domain.Post;
 
 import java.time.LocalDateTime;
 
@@ -31,8 +31,9 @@ public class Category extends BaseTimeEntity {
     @Column
     private LocalDateTime deletedAt;
 
-    @OneToOne(mappedBy = "category")
-    private Member member;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "post_id")
+    private Post post;
 
     public void delete(Boolean deletedFlag){
         this.deleted = !deletedFlag;
