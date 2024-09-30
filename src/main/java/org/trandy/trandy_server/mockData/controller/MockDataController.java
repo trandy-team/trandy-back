@@ -59,6 +59,7 @@ public class MockDataController {
 
             categoryRepository.saveAll(categories);
         }catch (Exception e){
+            e.printStackTrace();
             throw new RuntimeException("목데이터 생성 중 오류 발생");
         }
 
