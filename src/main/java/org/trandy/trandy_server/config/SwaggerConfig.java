@@ -55,7 +55,7 @@ public class SwaggerConfig {
                 .description("Local server");
 
         Server productionServer = new Server()
-                .url("https://api.trandy.site")
+                .url("https://trandy.site")
                 .description("Production server");
 
         return new OpenAPI()
