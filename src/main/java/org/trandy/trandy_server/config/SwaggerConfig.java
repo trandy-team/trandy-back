@@ -50,8 +50,12 @@ public class SwaggerConfig {
                         .bearerFormat("REFRESH"));
 
         // 서버 정보 설정
-        Server localServer = new Server()
+        Server localServer_8080 = new Server()
                 .url("http://localhost:8080")
+                .description("Local server");
+
+        Server localServer_8082 = new Server()
+                .url("http://localhost:8082")
                 .description("Local server");
 
         Server productionServer = new Server()
@@ -62,6 +66,6 @@ public class SwaggerConfig {
                 .info(info)
                 .addSecurityItem(securityRequirement)
                 .components(components)
-                .servers(Arrays.asList(localServer, productionServer));
+                .servers(Arrays.asList(localServer_8080, localServer_8082, productionServer));
     }
 }
