@@ -2,10 +2,48 @@ package org.trandy.trandy_server.post.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.trandy.trandy_server.category.domain.Category;
+import org.trandy.trandy_server.category.service.CategoryService;
+import org.trandy.trandy_server.common.Constants;
+import org.trandy.trandy_server.common.ResponseDto;
+import org.trandy.trandy_server.member.domain.Member;
+import org.trandy.trandy_server.member.service.MemberService;
+import org.trandy.trandy_server.post.domain.Post;
+import org.trandy.trandy_server.post.domain.dto.request.EnrollVoteRequest;
+import org.trandy.trandy_server.post.repository.PostRepository;
+import org.trandy.trandy_server.util.S3Util;
 
 @Service
 @RequiredArgsConstructor
 public class PostService {
-    public void enrollVote() {
+    private final PostRepository postRepository;
+    private final MemberService memberService;
+    private final CategoryService categoryService;
+    private final S3Util s3Util;
+
+    @Transactional
+    public ResponseDto enrollVote(EnrollVoteRequest request, long memberId) {
+        // 멤버 객체 영속화 (개발용)
+        Member member = memberService.retrieveMemberMockData(memberId);
+
+        // Category Persistence
+        Category category = categoryService.retrieveCategory(request.getCategoryId());
+
+        // Trim Hashtag String
+        String hashtag = request.getHashtag().trim();
+
+        // S3 File Upload
+        String imageUrl = s3Util.uploadFile(request.getImage());
+
+
+
+        Post post = Post.builder()
+                .title(request.getTitle())
+                .hashtag(hashtag)
+                .category(category)
+                .build();
+
+        return ResponseDto.success(Constants.API_RESPONSE_SUCCESSED);
     }
 }

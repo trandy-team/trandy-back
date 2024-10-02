@@ -1,12 +1,18 @@
 package org.trandy.trandy_server.post.controller;
 
+import io.swagger.v3.oas.annotations.Parameter;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.trandy.trandy_server.common.Constants;
 import org.trandy.trandy_server.common.ResponseDto;
+import org.trandy.trandy_server.common.jwt.UserDetailsImpl;
+import org.trandy.trandy_server.post.domain.dto.request.EnrollVoteRequest;
 import org.trandy.trandy_server.post.service.PostService;
 
 @RestController
@@ -16,9 +22,13 @@ public class PostController {
     private final PostService postService;
 
     @PostMapping("/enrollVote")
-    public ResponseEntity<ResponseDto> enrollVote(){
+    public ResponseEntity<ResponseDto> enrollVote(@ModelAttribute @Valid EnrollVoteRequest request,
+                                                    @Parameter(hidden = true) @AuthenticationPrincipal UserDetailsImpl userDetails){
 
-        postService.enrollVote();
+//        postService.enrollVote(request, userDetails.getMember());
+
+        // 로그인 구현 전 개발용
+        postService.enrollVote(request, 2);
 
         return ResponseEntity.ok(ResponseDto.success(Constants.API_RESPONSE_SUCCESSED));
     }

@@ -221,4 +221,11 @@ public class MemberService {
 
         return ResponseDto.success(Constants.API_RESPONSE_SUCCESSED);
     }
+
+    public Member retrieveMemberMockData(long memberId){
+        Member member = memberRepository.findById(memberId).orElseThrow(
+                () -> new CustomException(ExceptionStatus.MemberNotFoundException));
+
+        return member;
+    }
 }

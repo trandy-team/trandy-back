@@ -59,4 +59,9 @@ public class CategoryService {
 
         return ResponseDto.success(Constants.API_RESPONSE_SUCCESSED);
     }
+
+    public Category retrieveCategory(long categoryId){
+        return categoryRepository.findById(categoryId).orElseThrow(
+                () -> new CustomException(ExceptionStatus.DataNotFoundException));
+    }
 }

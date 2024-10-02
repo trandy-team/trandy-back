@@ -42,6 +42,12 @@ public class Post extends BaseTimeEntity {
     @Enumerated(EnumType.STRING)
     private VoteResult voteResult;
 
+    @Column
+    private String hashtag;
+
+    @Column(nullable = false, columnDefinition = "TEXT")
+    private String imageUrl;
+
     @Column(nullable = false)
     private Boolean deleted;
 

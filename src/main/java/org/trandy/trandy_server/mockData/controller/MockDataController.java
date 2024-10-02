@@ -43,7 +43,7 @@ public class MockDataController {
             members.add(Member.builder()
                     .email("trandy@naver.com")
                     .password(PasswordEncoderUtil.encodePassword("123123!"))
-                    .nickname("superuser")
+                    .nickname("user")
                     .memberRole(Role.USER)
                     .grade(Grade.BRONZE)
                     .build());

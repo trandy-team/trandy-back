@@ -2,6 +2,7 @@ package org.trandy.trandy_server.exception;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.apache.tomcat.util.http.fileupload.FileUpload;
 import org.springframework.http.HttpStatus;
 
 @Getter
@@ -31,8 +32,10 @@ public enum ExceptionStatus {
     CategoryNameIsDuplicatedException("CategoryNameIsDuplicatedException", HttpStatus.BAD_REQUEST, "이미 존재하는 카테고리 입니다. (삭제된 카테고리 포함)"),
 
     // DB
-    DataNotFoundException("DataNotFoundException", HttpStatus.BAD_REQUEST, "데이터가 존재하지 않습니다.");
+    DataNotFoundException("DataNotFoundException", HttpStatus.BAD_REQUEST, "데이터가 존재하지 않습니다."),
 
+    // S3
+    FileUploadFailedException("FileUploadFailedException", HttpStatus.BAD_REQUEST, "S3 파일 업로드에 실패했습니다");
     private final String exceptionName;
     private final HttpStatus statusCode;
     private final String errorMessage;
