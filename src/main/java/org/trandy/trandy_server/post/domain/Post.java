@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.SQLRestriction;
 import org.trandy.trandy_server.category.domain.Category;
 import org.trandy.trandy_server.common.BaseTimeEntity;
+import org.trandy.trandy_server.image.domain.Image;
 import org.trandy.trandy_server.member.domain.Member;
 
 import java.time.LocalDateTime;
@@ -29,10 +30,6 @@ public class Post extends BaseTimeEntity {
 
     @Column(nullable = false, columnDefinition = "TEXT")
     private String contents;
-
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private VoteType voteType;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
@@ -60,6 +57,10 @@ public class Post extends BaseTimeEntity {
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, mappedBy = "post")
     private Category category;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "image_id")
+    private Image image;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, mappedBy = "post")
     @Builder.Default

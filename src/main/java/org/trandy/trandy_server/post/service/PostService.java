@@ -7,9 +7,12 @@ import org.trandy.trandy_server.category.domain.Category;
 import org.trandy.trandy_server.category.service.CategoryService;
 import org.trandy.trandy_server.common.Constants;
 import org.trandy.trandy_server.common.ResponseDto;
+import org.trandy.trandy_server.image.domain.Image;
+import org.trandy.trandy_server.image.service.ImageService;
 import org.trandy.trandy_server.member.domain.Member;
 import org.trandy.trandy_server.member.service.MemberService;
 import org.trandy.trandy_server.post.domain.Post;
+import org.trandy.trandy_server.post.domain.VoteStatus;
 import org.trandy.trandy_server.post.domain.dto.request.EnrollVoteRequest;
 import org.trandy.trandy_server.post.repository.PostRepository;
 import org.trandy.trandy_server.util.S3Util;
@@ -20,6 +23,7 @@ public class PostService {
     private final PostRepository postRepository;
     private final MemberService memberService;
     private final CategoryService categoryService;
+    private final ImageService imageService;
     private final S3Util s3Util;
 
     @Transactional
@@ -33,16 +37,18 @@ public class PostService {
         // Trim Hashtag String
         String hashtag = request.getHashtag().trim();
 
-        // S3 File Upload
-        String imageUrl = s3Util.uploadFile(request.getImage());
-
-
-
-        Post post = Post.builder()
+        // Post 객체 기 생성
+        Post post = postRepository.save(Post.builder()
                 .title(request.getTitle())
                 .hashtag(hashtag)
+                .voteStatus(VoteStatus.IN_PROGRESS)
                 .category(category)
-                .build();
+                .member(member)
+                .build());
+
+        // S3 File Upload
+        String imageUrl = s3Util.uploadFile(request.getImage());
+        Image image = imageService.saveImage(imageUrl, post);
 
         return ResponseDto.success(Constants.API_RESPONSE_SUCCESSED);
     }
