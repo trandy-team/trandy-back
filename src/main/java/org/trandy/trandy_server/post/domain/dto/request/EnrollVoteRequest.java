@@ -24,7 +24,6 @@ public class EnrollVoteRequest {
     @Schema(description = "해시태그", example = "#여자아이돌 #월클")
     private String hashtag;
 
-    @Schema(description = "이미지 첨부")
     private MultipartFile image;
 
 }
