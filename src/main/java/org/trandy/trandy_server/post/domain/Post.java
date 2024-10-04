@@ -35,7 +35,7 @@ public class Post extends BaseTimeEntity {
     @Enumerated(EnumType.STRING)
     private VoteStatus voteStatus;
 
-    @Column(nullable = false)
+    @Column
     @Enumerated(EnumType.STRING)
     private VoteResult voteResult;
 
