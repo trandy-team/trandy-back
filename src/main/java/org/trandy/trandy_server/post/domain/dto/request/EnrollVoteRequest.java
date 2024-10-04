@@ -8,7 +8,6 @@ import lombok.Setter;
 import org.springframework.web.multipart.MultipartFile;
 
 @Getter
-@Setter
 @AllArgsConstructor
 public class EnrollVoteRequest {
     @NotNull
