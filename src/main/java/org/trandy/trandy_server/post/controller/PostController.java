@@ -1,6 +1,8 @@
 package org.trandy.trandy_server.post.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +23,9 @@ import org.trandy.trandy_server.post.service.PostService;
 public class PostController {
     private final PostService postService;
 
-    @PostMapping("/enrollVote")
+    @Operation(summary = "투표 글 등록", description = "이미지 파일 업로드 및 투표글 생성")
+    @ApiResponse(responseCode = "200", description = "SUCCESSED")
+    @PostMapping(value = "/enrollVote", consumes = "multipart/form-data")
     public ResponseEntity<ResponseDto> enrollVote(@ModelAttribute @Valid EnrollVoteRequest request,
                                                     @Parameter(hidden = true) @AuthenticationPrincipal UserDetailsImpl userDetails){
 

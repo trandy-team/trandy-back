@@ -13,6 +13,8 @@ import org.trandy.trandy_server.member.domain.Grade;
 import org.trandy.trandy_server.member.domain.Member;
 import org.trandy.trandy_server.member.domain.Role;
 import org.trandy.trandy_server.member.repository.MemberRepository;
+import org.trandy.trandy_server.post.repository.PostRepository;
+import org.trandy.trandy_server.post.service.PostService;
 import org.trandy.trandy_server.util.PasswordEncoderUtil;
 
 import java.util.ArrayList;
@@ -24,6 +26,7 @@ import java.util.List;
 public class MockDataController {
     private final MemberRepository memberRepository;
     private final CategoryRepository categoryRepository;
+    private final PostService postService;
 
     @PostMapping("/createMockData")
     public ResponseEntity<ResponseDto> createMockData(){
@@ -58,6 +61,7 @@ public class MockDataController {
             categories.add(Category.builder().categoryName("밈").build());
 
             categoryRepository.saveAll(categories);
+
         }catch (Exception e){
             e.printStackTrace();
             throw new RuntimeException("목데이터 생성 중 오류 발생");
