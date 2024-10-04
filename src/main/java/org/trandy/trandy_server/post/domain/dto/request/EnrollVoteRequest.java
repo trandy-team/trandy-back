@@ -2,10 +2,12 @@ package org.trandy.trandy_server.post.domain.dto.request;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.web.multipart.MultipartFile;
 
 @Getter
+@AllArgsConstructor
 public class EnrollVoteRequest {
     @NotNull
     @Schema(description = "투표 제목", example = "뉴진스는 대세다?")

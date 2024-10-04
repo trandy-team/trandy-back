@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -25,7 +26,7 @@ public class PostController {
 
     @Operation(summary = "투표 글 등록", description = "이미지 파일 업로드 및 투표글 생성")
     @ApiResponse(responseCode = "200", description = "SUCCESSED")
-    @PostMapping(value = "/enrollVote", consumes = "multipart/form-data")
+    @PostMapping(value = "/enrollVote", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<ResponseDto> enrollVote(@ModelAttribute @Valid EnrollVoteRequest request,
                                                     @Parameter(hidden = true) @AuthenticationPrincipal UserDetailsImpl userDetails){
 
