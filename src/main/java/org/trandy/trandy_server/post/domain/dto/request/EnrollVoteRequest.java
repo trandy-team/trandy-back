@@ -7,8 +7,9 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.web.multipart.MultipartFile;
 
-@Getter
 @AllArgsConstructor
+@Setter
+@Getter
 public class EnrollVoteRequest {
     @NotNull
     @Schema(description = "투표 제목", example = "뉴진스는 대세다?")
