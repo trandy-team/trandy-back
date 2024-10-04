@@ -40,6 +40,7 @@ public class PostService {
         // Post 객체 기 생성
         Post post = postRepository.save(Post.builder()
                 .title(request.getTitle())
+                        .contents(request.getContents())
                 .hashtag(hashtag)
                 .voteStatus(VoteStatus.IN_PROGRESS)
                 .category(category)
