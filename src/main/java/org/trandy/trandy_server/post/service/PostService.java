@@ -40,11 +40,12 @@ public class PostService {
         // Post 객체 기 생성
         Post post = postRepository.save(Post.builder()
                 .title(request.getTitle())
-                        .contents(request.getContents())
+                .contents(request.getContents())
                 .hashtag(hashtag)
                 .voteStatus(VoteStatus.IN_PROGRESS)
                 .category(category)
                 .member(member)
+                .deleted(Constants.DELETED_NOT)
                 .build());
 
         // S3 File Upload
