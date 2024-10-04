@@ -42,9 +42,6 @@ public class Post extends BaseTimeEntity {
     @Column
     private String hashtag;
 
-    @Column(nullable = false, columnDefinition = "TEXT")
-    private String imageUrl;
-
     @Column(nullable = false)
     private Boolean deleted;
 
