@@ -30,7 +30,7 @@ public class S3Util {
 
     public String uploadFile(MultipartFile multipartFile) {
         if (multipartFile == null || multipartFile.isEmpty()) {
-            return null;
+            throw new CustomException(ExceptionStatus.FileUploadFailedException);
         }
 
         String fileName = createFileName(multipartFile.getOriginalFilename());

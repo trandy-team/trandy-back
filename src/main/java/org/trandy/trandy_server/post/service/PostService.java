@@ -50,6 +50,10 @@ public class PostService {
         String imageUrl = s3Util.uploadFile(request.getImage());
         Image image = imageService.saveImage(imageUrl, post);
 
+        // Post 객체 image 초기화
+        post.toBuilder()
+                .image(image);
+
         return ResponseDto.success(Constants.API_RESPONSE_SUCCESSED);
     }
 }
