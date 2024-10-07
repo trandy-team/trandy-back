@@ -22,7 +22,7 @@ import java.util.UUID;
 public class S3Util {
     private final AmazonS3 amazonS3;
 
-    @Value("{$cloud.aws.s3.bucketName}")
+    @Value("${cloud.aws.s3.bucketName}")
     private String bucketName;
 
     @Value("${cloud.aws.region.static}")
