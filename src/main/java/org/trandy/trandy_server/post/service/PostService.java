@@ -56,6 +56,9 @@ public class PostService {
         post.toBuilder()
                 .image(image);
 
+        // image 업데이트된 Post로 Update
+        postRepository.save(post);
+
         return ResponseDto.success(Constants.API_RESPONSE_SUCCESSED);
     }
 }
