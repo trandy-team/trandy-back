@@ -20,7 +20,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @SQLRestriction("deleted = false")
-@Builder(toBuilder = true)
+@Builder
 public class Post extends BaseTimeEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -62,4 +62,8 @@ public class Post extends BaseTimeEntity {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, mappedBy = "post")
     @Builder.Default
     private List<Report> reports = new ArrayList<>();
+
+    public void updateImage(Image image){
+        this.image = image;
+    }
 }

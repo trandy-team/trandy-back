@@ -53,8 +53,7 @@ public class PostService {
         Image image = imageService.saveImage(imageUrl, post);
 
         // Post 객체 image 초기화
-        post.toBuilder()
-                .image(image);
+        post.updateImage(image);
 
         // image 업데이트된 Post로 Update
         postRepository.save(post);
