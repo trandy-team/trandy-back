@@ -33,7 +33,8 @@ public class S3Util {
             throw new CustomException(ExceptionStatus.FileUploadFailedException);
         }
 
-        String fileName = createFileName(multipartFile.getOriginalFilename());
+        String directoryName = "images/";
+        String fileName = directoryName + createFileName(multipartFile.getOriginalFilename());
         ObjectMetadata objectMetadata = new ObjectMetadata();
         objectMetadata.setContentLength(multipartFile.getSize());
         objectMetadata.setContentType(multipartFile.getContentType());
