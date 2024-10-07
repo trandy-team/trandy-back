@@ -19,6 +19,7 @@ public class Image {
     @Column(nullable = false, columnDefinition = "TEXT")
     private String imageUrl;
 
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "image") // 주인의 필드 이름 명시
-    private Post post; // 외래 키 정의 없음
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "post_id") // 외래 키 정의
+    private Post post;
 }
