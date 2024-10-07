@@ -1,4 +1,4 @@
-package org.trandy.trandy_server.post.domain;
+package org.trandy.trandy_server.report.domain;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

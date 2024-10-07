@@ -7,6 +7,8 @@ import org.trandy.trandy_server.category.domain.Category;
 import org.trandy.trandy_server.category.service.CategoryService;
 import org.trandy.trandy_server.common.Constants;
 import org.trandy.trandy_server.common.ResponseDto;
+import org.trandy.trandy_server.exception.CustomException;
+import org.trandy.trandy_server.exception.ExceptionStatus;
 import org.trandy.trandy_server.image.domain.Image;
 import org.trandy.trandy_server.image.service.ImageService;
 import org.trandy.trandy_server.member.domain.Member;
@@ -59,5 +61,11 @@ public class PostService {
         postRepository.save(post);
 
         return ResponseDto.success(Constants.API_RESPONSE_SUCCESSED);
+    }
+
+    public Post retrievePostById(long postId){
+        Post post = postRepository.findById(postId).orElseThrow(
+                () -> new CustomException(ExceptionStatus.DataNotFoundException));
+        return post;
     }
 }

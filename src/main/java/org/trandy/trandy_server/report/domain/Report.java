@@ -1,4 +1,4 @@
-package org.trandy.trandy_server.post.domain;
+package org.trandy.trandy_server.report.domain;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.trandy.trandy_server.common.BaseTimeEntity;
+import org.trandy.trandy_server.post.domain.Post;
 
 @Entity
 @NoArgsConstructor

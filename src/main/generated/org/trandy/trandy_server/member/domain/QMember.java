@@ -8,6 +8,7 @@ import com.querydsl.core.types.PathMetadata;
 import javax.annotation.processing.Generated;
 import com.querydsl.core.types.Path;
 import com.querydsl.core.types.dsl.PathInits;
+import org.trandy.trandy_server.post.domain.Post;
 
 
 /**
@@ -44,7 +45,7 @@ public class QMember extends EntityPathBase<Member> {
 
     public final StringPath password = createString("password");
 
-    public final ListPath<org.trandy.trandy_server.post.domain.Post, org.trandy.trandy_server.post.domain.QPost> posts = this.<org.trandy.trandy_server.post.domain.Post, org.trandy.trandy_server.post.domain.QPost>createList("posts", org.trandy.trandy_server.post.domain.Post.class, org.trandy.trandy_server.post.domain.QPost.class, PathInits.DIRECT2);
+    public final ListPath<Post, org.trandy.trandy_server.post.domain.QPost> posts = this.<Post, org.trandy.trandy_server.post.domain.QPost>createList("posts", Post.class, org.trandy.trandy_server.post.domain.QPost.class, PathInits.DIRECT2);
 
     public final StringPath profileImageUrl = createString("profileImageUrl");
 

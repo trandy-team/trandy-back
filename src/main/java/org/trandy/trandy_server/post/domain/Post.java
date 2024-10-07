@@ -7,9 +7,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.SQLRestriction;
 import org.trandy.trandy_server.category.domain.Category;
+import org.trandy.trandy_server.comment.domain.VoteComment;
 import org.trandy.trandy_server.common.BaseTimeEntity;
 import org.trandy.trandy_server.image.domain.Image;
 import org.trandy.trandy_server.member.domain.Member;
+import org.trandy.trandy_server.report.domain.Report;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -61,6 +63,10 @@ public class Post extends BaseTimeEntity {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, mappedBy = "post")
     @Builder.Default
     private List<Report> reports = new ArrayList<>();
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, mappedBy = "post")
+    @Builder.Default
+    private List<VoteComment> voteComments = new ArrayList<>();
 
     public void updateImage(Image image){
         this.image = image;
