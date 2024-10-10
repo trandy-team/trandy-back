@@ -1,22 +1,20 @@
 package org.trandy.trandy_server.member.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-
-import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-import org.trandy.trandy_server.member.domain.dto.request.KakaoInfoRequest;
+import lombok.AllArgsConstructor;
+import org.springframework.web.bind.annotation.*;
 import org.trandy.trandy_server.member.service.KakaoService;
 
 @RestController
-@RequiredArgsConstructor
+@AllArgsConstructor
+@RequestMapping("/oauth")
 public class KakaoController {
     private final KakaoService kakaoService;
 
+    @ResponseBody
     @GetMapping("/kakao")
-    public KakaoInfoRequest kakaoLogin(@RequestParam String code) throws JsonProcessingException {
-        return kakaoService.kakaoLogin(code);
+    public void kakaoCallback(@RequestParam("code") String code) {
+        String accessToken = kakaoService.getKakaoAccessToken(code);
+        System.out.println("인가코드 : " + code);
+        System.out.println("Controller accessToken : " + accessToken);
     }
-
 }
