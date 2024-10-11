@@ -1,5 +1,6 @@
 package org.trandy.trandy_server.post.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -62,10 +63,12 @@ public class Post extends BaseTimeEntity {
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, mappedBy = "post")
     @Builder.Default
+    @JsonIgnore
     private List<Report> reports = new ArrayList<>();
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, mappedBy = "post")
     @Builder.Default
+    @JsonIgnore
     private List<VoteComment> voteComments = new ArrayList<>();
 
     public void updateImage(Image image){
