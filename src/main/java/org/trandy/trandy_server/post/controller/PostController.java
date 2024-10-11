@@ -34,4 +34,31 @@ public class PostController {
 
         return ResponseEntity.ok(ResponseDto.success(Constants.API_RESPONSE_SUCCESSED));
     }
+
+    @Operation(summary = "투표 글 조회", description = "투표글 전체 조회")
+    @ApiResponse(responseCode = "200", description = "SUCCESSED")
+    @GetMapping(value = "/retrieveVoteList")
+    public ResponseEntity<ResponseDto> retrieveVoteList(@RequestParam String param,
+                                                        @Parameter(hidden = true) @AuthenticationPrincipal UserDetailsImpl userDetails){
+
+//        postService.retrieveVoteList(request, userDetails.getMember());
+
+        // 로그인 구현 전 개발용
+//        postService.retrieveVoteList(param, 2);
+
+        return ResponseEntity.ok(ResponseDto.success(Constants.API_RESPONSE_SUCCESSED));
+    }
+
+    @Operation(summary = "[메인 화면] 유행 진행 중 게시물 List", description = "voteResult 가 유행 중인 게시물 List 조회")
+    @ApiResponse(responseCode = "200", description = "SUCCESSED")
+    @GetMapping(value = "/retrieveTrendingPostList")
+    public ResponseEntity<ResponseDto> retrieveTrendingPostList(){
+
+//        postService.retrieveVoteList(request, userDetails.getMember());
+
+        // 로그인 구현 전 개발용
+//        postService.retrieveVoteList(param, 2);
+
+        return ResponseEntity.ok(ResponseDto.success(Constants.API_RESPONSE_SUCCESSED));
+    }
 }
