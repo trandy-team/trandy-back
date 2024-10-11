@@ -19,6 +19,8 @@ import org.trandy.trandy_server.post.domain.dto.request.EnrollVoteRequest;
 import org.trandy.trandy_server.post.repository.PostRepository;
 import org.trandy.trandy_server.util.S3Util;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class PostService {
@@ -67,5 +69,11 @@ public class PostService {
         Post post = postRepository.findById(postId).orElseThrow(
                 () -> new CustomException(ExceptionStatus.DataNotFoundException));
         return post;
+    }
+
+    public ResponseDto retrieveTrendingPostList() {
+        List<Post> postList = postRepository.retrieveTrendingPostList();
+
+        return ResponseDto.success(Constants.API_RESPONSE_SUCCESSED);
     }
 }

@@ -54,11 +54,6 @@ public class PostController {
     @GetMapping(value = "/retrieveTrendingPostList")
     public ResponseEntity<ResponseDto> retrieveTrendingPostList(){
 
-//        postService.retrieveVoteList(request, userDetails.getMember());
-
-        // 로그인 구현 전 개발용
-//        postService.retrieveVoteList(param, 2);
-
-        return ResponseEntity.ok(ResponseDto.success(Constants.API_RESPONSE_SUCCESSED));
+        return ResponseEntity.ok(postService.retrieveTrendingPostList());
     }
 }
