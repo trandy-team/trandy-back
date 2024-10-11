@@ -72,8 +72,6 @@ public class PostService {
     }
 
     public ResponseDto retrieveTrendingPostList() {
-        List<Post> postList = postRepository.retrieveTrendingPostList();
-
-        return ResponseDto.success(Constants.API_RESPONSE_SUCCESSED);
+        return ResponseDto.success(postRepository.retrieveTrendingPostList());
     }
 }

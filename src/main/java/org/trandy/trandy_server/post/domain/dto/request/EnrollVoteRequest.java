@@ -13,7 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Getter
 public class EnrollVoteRequest {
     @NotNull
-    @Schema(description = "투표 ID", example = "1")
+    @Schema(description = "투표 제목", example = "뉴진스는 대세일까?")
     private String title;
 
     @NotNull
