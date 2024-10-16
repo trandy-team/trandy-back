@@ -12,7 +12,7 @@ public class KakaoController {
 
     @ResponseBody
     @GetMapping("/kakao")
-    public void kakaoCallback(@RequestParam("code") String code) {
+    public void kakaoCallback(@RequestParam String code) {
         String accessToken = kakaoService.getKakaoAccessToken(code);
         System.out.println("인가코드 : " + code);
         System.out.println("Controller accessToken : " + accessToken);

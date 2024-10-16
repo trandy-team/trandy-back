@@ -16,22 +16,21 @@ import java.net.URL;
 public class KakaoService {
     public String getKakaoAccessToken(String code) {
         String accessToken = "";
-        String redirectUrl = "http://localhost:8080/oauth/kakao";
+        String requsetUrl = "https://kauth.kakao.com/oauth/token";
 
         try {
-            URL url = new URL(redirectUrl);
+            URL url = new URL(requsetUrl);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
             //post요청
             connection.setRequestMethod("POST");
-            connection.setDoInput(true);
             connection.setDoOutput(true);
             connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 
             //post요청에 필요한 파라미터 처리
             BufferedWriter bufWriter = new BufferedWriter(new OutputStreamWriter(connection.getOutputStream()));
             StringBuilder sb = new StringBuilder();
-            sb.append("grant_type=client_credentials");
+            sb.append("grant_type=authorization_code");
             sb.append("&client_id=219c411447f686a59391ba49ddb3505d");
             sb.append("&redirect_uri=http://localhost:8080/oauth/kakao");
             sb.append("&code=" + code);
@@ -56,7 +55,7 @@ public class KakaoService {
             JsonParser parser = new JsonParser();
             JsonElement element = parser.parse(result);
 
-            accessToken = element.getAsJsonObject().get("accessToken").getAsString();
+            accessToken = element.getAsJsonObject().get("access_token").getAsString();
 
             System.out.println("Access token : " + accessToken);
 
