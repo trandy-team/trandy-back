@@ -28,8 +28,8 @@ public class TrendingPostResponse {
     private String hashtag;
     private Boolean deleted;
     private LocalDateTime deletedAt;
-    private Member member;
-    private Category category;
-    private Image image;
+    private String nickname;
+    private String categoryName;
+    private String image;
     private List<VoteComment> voteComments;
 }

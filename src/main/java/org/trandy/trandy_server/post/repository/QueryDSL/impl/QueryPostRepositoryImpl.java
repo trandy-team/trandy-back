@@ -37,9 +37,9 @@ public class QueryPostRepositoryImpl implements QueryPostRepository {
                         post.hashtag,
                         post.deleted,
                         post.deletedAt,
-                        post.member,
-                        post.category,
-                        post.image,
+                        post.member.nickname,
+                        post.category.categoryName,
+                        post.image.imageUrl,
                         post.voteComments
                 ))
                 .from(post)
