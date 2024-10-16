@@ -39,11 +39,9 @@ public class QueryPostRepositoryImpl implements QueryPostRepository {
                         post.deletedAt,
                         post.member.nickname,
                         post.category.categoryName,
-                        post.image.imageUrl,
-                        post.voteComments
+                        post.image.imageUrl
                 ))
                 .from(post)
-                .leftJoin(post.voteComments, voteComment)
                 .where(post.voteResult.eq(VoteResult.TRENDING),
                         post.deleted.isFalse())
                 .fetch();
