@@ -43,40 +43,11 @@ public class QueryPostRepositoryImpl implements QueryPostRepository {
                         post.voteComments
                 ))
                 .from(post)
+                .leftJoin(post.voteComments, voteComment)
                 .where(post.voteResult.eq(VoteResult.TRENDING),
                         post.deleted.isFalse())
                 .fetch();
+
         return posts;
-//        List<Post> posts = jpaQueryFactory
-//                .selectFrom(post)
-//                .leftJoin(post.voteComments, voteComment)
-//                .leftJoin(post.image)
-//                .where(post.voteResult.eq(VoteResult.TRENDING),
-//                        post.deleted.isFalse())
-//                .distinct()
-//                .fetch();
-//
-//        // 조회한 Post 엔티티를 DTO로 변환
-//        List<TrendingPostResponse> responses = posts.stream()
-//                .map(postEntity -> TrendingPostResponse.builder()
-//                        .id(postEntity.getId())
-//                        .title(postEntity.getTitle())
-//                        .contents(postEntity.getContents())
-//                        .voteStatus(postEntity.getVoteStatus())
-//                        .voteResult(postEntity.getVoteResult())
-//                        .hashtag(postEntity.getHashtag())
-//                        .deleted(postEntity.getDeleted())
-//                        .deletedAt(postEntity.getDeletedAt())
-//                        .member(postEntity.getMember())
-//                        .category(postEntity.getCategory())
-//                        .image(postEntity.getImage())
-//                        .reports(postEntity.getReports())
-//                        .voteComments(postEntity.getVoteComments())
-//                        .build()
-//                )
-//                .collect(Collectors.toList());
-//
-//        return responses;
-//    }
     }
 }
