@@ -10,6 +10,8 @@ import org.trandy.trandy_server.common.BaseTimeEntity;
 import org.trandy.trandy_server.post.domain.Post;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -31,9 +33,9 @@ public class Category extends BaseTimeEntity {
     @Column
     private LocalDateTime deletedAt;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "post_id")
-    private Post post;
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "category")
+    @Builder.Default()
+    private List<Post> posts = new ArrayList<>();
 
     public void delete(Boolean deletedFlag){
         this.deleted = !deletedFlag;
