@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 import org.trandy.trandy_server.category.domain.Category;
 import org.trandy.trandy_server.comment.domain.VoteComment;
 import org.trandy.trandy_server.image.domain.Image;
@@ -16,6 +17,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
+@Setter
 @AllArgsConstructor
 public class TrendingPostResponse {
     private Long id;

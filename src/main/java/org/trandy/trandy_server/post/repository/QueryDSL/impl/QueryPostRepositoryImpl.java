@@ -28,7 +28,7 @@ public class QueryPostRepositoryImpl implements QueryPostRepository {
         List<TrendingPostResponse> posts = jpaQueryFactory
                 .select(Projections.constructor(
                         TrendingPostResponse.class,
-                        post.id,                   // DTO 생성자에 맞춰 순서대로 입력
+                        post.id,
                         post.title,
                         post.contents,
                         post.voteStatus,
@@ -43,11 +43,10 @@ public class QueryPostRepositoryImpl implements QueryPostRepository {
                         post.voteComments
                 ))
                 .from(post)
-                .leftJoin(post.voteComments, voteComment)
-                .leftJoin(post.reports, report)
+                .leftJoin(post.voteComments, voteComment).fetchJoin().distinct()
+                .leftJoin(post.reports, report).fetchJoin().distinct()
                 .where(post.voteResult.eq(VoteResult.TRENDING),
                         post.deleted.isFalse())
-                .distinct()
                 .fetch();
 
         return posts;

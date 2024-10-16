@@ -60,11 +60,11 @@ public class Post extends BaseTimeEntity {
     @OneToOne(orphanRemoval = true, mappedBy = "post")
     private Image image;
 
-    @OneToMany(orphanRemoval = true, mappedBy = "post")
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "post")
     @Builder.Default
     private List<Report> reports = new ArrayList<>();
 
-    @OneToMany(orphanRemoval = true, mappedBy = "post")
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "post")
     @Builder.Default
     private List<VoteComment> voteComments = new ArrayList<>();
 
