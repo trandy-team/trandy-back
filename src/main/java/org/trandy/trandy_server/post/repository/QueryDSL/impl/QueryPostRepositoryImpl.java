@@ -43,7 +43,7 @@ public class QueryPostRepositoryImpl implements QueryPostRepository {
                         post.voteComments
                 ))
                 .from(post)
-                .leftJoin(post.voteComments, voteComment).fetchJoin().distinct()
+                .leftJoin(post.voteComments, voteComment).distinct()
                 .where(post.voteResult.eq(VoteResult.TRENDING),
                         post.deleted.isFalse())
                 .fetch();
