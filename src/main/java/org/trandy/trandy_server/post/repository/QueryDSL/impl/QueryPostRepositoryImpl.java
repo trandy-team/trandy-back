@@ -26,59 +26,58 @@ public class QueryPostRepositoryImpl implements QueryPostRepository {
     @Override
     public List<TrendingPostResponse> retrieveTrendingPostList() {
         // Projection 으로 DTO 직접 조회하는 방식으로 구현한다.
-//        List<TrendingPostResponse> posts = jpaQueryFactory
-//                .select(Projections.constructor(
-//                        TrendingPostResponse.class,
-//                        post.id,
-//                        post.title,
-//                        post.contents,
-//                        post.voteStatus,
-//                        post.voteResult,
-//                        post.hashtag,
-//                        post.deleted,
-//                        post.deletedAt,
-//                        post.member,
-//                        post.category,
-//                        post.image,
-//                        post.reports,
-//                        post.voteComments
-//                ))
-//                .from(post)
-//                .leftJoin(post.voteComments, voteComment).fetchJoin().distinct()
-//                .leftJoin(post.reports, report).fetchJoin().distinct()
-//                .where(post.voteResult.eq(VoteResult.TRENDING),
-//                        post.deleted.isFalse())
-//                .fetch();
-        List<Post> posts = jpaQueryFactory
-                .selectFrom(post)
-                .leftJoin(post.voteComments, voteComment).fetchJoin()
-                .leftJoin(post.reports, report)
-                .leftJoin(post.image)
+        List<TrendingPostResponse> posts = jpaQueryFactory
+                .select(Projections.constructor(
+                        TrendingPostResponse.class,
+                        post.id,
+                        post.title,
+                        post.contents,
+                        post.voteStatus,
+                        post.voteResult,
+                        post.hashtag,
+                        post.deleted,
+                        post.deletedAt,
+                        post.member,
+                        post.category,
+                        post.image,
+                        post.voteComments
+                ))
+                .from(post)
+                .leftJoin(post.voteComments, voteComment).fetchJoin().distinct()
                 .where(post.voteResult.eq(VoteResult.TRENDING),
                         post.deleted.isFalse())
-                .distinct()
                 .fetch();
-
-        // 조회한 Post 엔티티를 DTO로 변환
-        List<TrendingPostResponse> responses = posts.stream()
-                .map(postEntity -> TrendingPostResponse.builder()
-                        .id(postEntity.getId())
-                        .title(postEntity.getTitle())
-                        .contents(postEntity.getContents())
-                        .voteStatus(postEntity.getVoteStatus())
-                        .voteResult(postEntity.getVoteResult())
-                        .hashtag(postEntity.getHashtag())
-                        .deleted(postEntity.getDeleted())
-                        .deletedAt(postEntity.getDeletedAt())
-                        .member(postEntity.getMember())
-                        .category(postEntity.getCategory())
-                        .image(postEntity.getImage())
-                        .reports(postEntity.getReports())
-                        .voteComments(postEntity.getVoteComments())
-                        .build()
-                )
-                .collect(Collectors.toList());
-
-        return responses;
+        return posts;
+//        List<Post> posts = jpaQueryFactory
+//                .selectFrom(post)
+//                .leftJoin(post.voteComments, voteComment)
+//                .leftJoin(post.image)
+//                .where(post.voteResult.eq(VoteResult.TRENDING),
+//                        post.deleted.isFalse())
+//                .distinct()
+//                .fetch();
+//
+//        // 조회한 Post 엔티티를 DTO로 변환
+//        List<TrendingPostResponse> responses = posts.stream()
+//                .map(postEntity -> TrendingPostResponse.builder()
+//                        .id(postEntity.getId())
+//                        .title(postEntity.getTitle())
+//                        .contents(postEntity.getContents())
+//                        .voteStatus(postEntity.getVoteStatus())
+//                        .voteResult(postEntity.getVoteResult())
+//                        .hashtag(postEntity.getHashtag())
+//                        .deleted(postEntity.getDeleted())
+//                        .deletedAt(postEntity.getDeletedAt())
+//                        .member(postEntity.getMember())
+//                        .category(postEntity.getCategory())
+//                        .image(postEntity.getImage())
+//                        .reports(postEntity.getReports())
+//                        .voteComments(postEntity.getVoteComments())
+//                        .build()
+//                )
+//                .collect(Collectors.toList());
+//
+//        return responses;
+//    }
     }
 }

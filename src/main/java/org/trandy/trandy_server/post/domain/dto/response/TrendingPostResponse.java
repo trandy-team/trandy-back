@@ -31,6 +31,5 @@ public class TrendingPostResponse {
     private Member member;
     private Category category;
     private Image image;
-    private List<Report> reports;
     private List<VoteComment> voteComments;
 }
