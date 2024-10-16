@@ -52,8 +52,8 @@ public class QueryPostRepositoryImpl implements QueryPostRepository {
         List<Post> posts = jpaQueryFactory
                 .selectFrom(post)
                 .leftJoin(post.voteComments, voteComment).fetchJoin()
-                .leftJoin(post.reports, report).fetchJoin()
-                .leftJoin(post.image).fetchJoin()
+                .leftJoin(post.reports, report)
+                .leftJoin(post.image)
                 .where(post.voteResult.eq(VoteResult.TRENDING),
                         post.deleted.isFalse())
                 .distinct()
