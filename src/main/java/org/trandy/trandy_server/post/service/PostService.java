@@ -16,8 +16,11 @@ import org.trandy.trandy_server.member.service.MemberService;
 import org.trandy.trandy_server.post.domain.Post;
 import org.trandy.trandy_server.post.domain.VoteStatus;
 import org.trandy.trandy_server.post.domain.dto.request.EnrollVoteRequest;
+import org.trandy.trandy_server.post.domain.dto.response.PostByCategoryResponse;
 import org.trandy.trandy_server.post.repository.PostRepository;
 import org.trandy.trandy_server.util.S3Util;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -66,15 +69,9 @@ public class PostService {
 
     @Transactional(readOnly = true)
     public ResponseDto retrieveVoteListByCategory(long categoryId, int memberId) {
-        // 멤버 객체 영속화 (개발용)
-        Member member = memberService.retrieveMemberMockData(memberId);
+        List<PostByCategoryResponse> postList = postRepository.retrieveVoteListByCategory(categoryId, memberId);
 
-        // Category 영속화
-        Category category = categoryService.retrieveCategory(categoryId);
-
-
-
-        return ResponseDto.success(Constants.API_RESPONSE_SUCCESSED);
+        return ResponseDto.success(postList);
     }
 
     @Transactional(readOnly = true)
