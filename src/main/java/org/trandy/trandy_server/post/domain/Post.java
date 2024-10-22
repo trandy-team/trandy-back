@@ -69,7 +69,14 @@ public class Post extends BaseTimeEntity {
     @Builder.Default
     private List<VoteComment> voteComments = new ArrayList<>();
 
+    @Column
+    private long voteCount;
+
     public void updateImage(Image image){
         this.image = image;
+    }
+
+    public void increaseVoteCount(){
+        this.voteCount++;
     }
 }

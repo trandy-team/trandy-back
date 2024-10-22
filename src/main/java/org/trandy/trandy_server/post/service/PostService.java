@@ -19,8 +19,6 @@ import org.trandy.trandy_server.post.domain.dto.request.EnrollVoteRequest;
 import org.trandy.trandy_server.post.repository.PostRepository;
 import org.trandy.trandy_server.util.S3Util;
 
-import java.util.List;
-
 @Service
 @RequiredArgsConstructor
 public class PostService {
@@ -35,7 +33,7 @@ public class PostService {
         // 멤버 객체 영속화 (개발용)
         Member member = memberService.retrieveMemberMockData(memberId);
 
-        // Category Persistence
+        // Category 영속화
         Category category = categoryService.retrieveCategory(request.getCategoryId());
 
         // Trim Hashtag String
@@ -50,6 +48,7 @@ public class PostService {
                 .category(category)
                 .member(member)
                 .deleted(Constants.DELETED_NOT)
+                .voteCount(0)
                 .build());
 
         // S3 File Upload
@@ -65,13 +64,33 @@ public class PostService {
         return ResponseDto.success(Constants.API_RESPONSE_SUCCESSED);
     }
 
+    @Transactional(readOnly = true)
+    public ResponseDto retrieveVoteListByCategory(long categoryId, int memberId) {
+        // 멤버 객체 영속화 (개발용)
+        Member member = memberService.retrieveMemberMockData(memberId);
+
+        // Category 영속화
+        Category category = categoryService.retrieveCategory(categoryId);
+
+
+
+        return ResponseDto.success(Constants.API_RESPONSE_SUCCESSED);
+    }
+
+    @Transactional(readOnly = true)
+    public ResponseDto retrieveTrendingPostList() {
+        return ResponseDto.success(postRepository.retrieveTrendingPostList());
+    }
+
     public Post retrievePostById(long postId){
         Post post = postRepository.findById(postId).orElseThrow(
                 () -> new CustomException(ExceptionStatus.DataNotFoundException));
         return post;
     }
 
-    public ResponseDto retrieveTrendingPostList() {
-        return ResponseDto.success(postRepository.retrieveTrendingPostList());
+    public void increaseVoteCount(Post post){
+        post.increaseVoteCount();
+
+        postRepository.save(post);
     }
 }

@@ -46,6 +46,9 @@ public class CommentService {
                         .post(post)
                 .build());
 
+        // VoteCount 증가
+        postService.increaseVoteCount(post);
+
         return ResponseDto.success(Constants.API_RESPONSE_SUCCESSED);
     }
 }

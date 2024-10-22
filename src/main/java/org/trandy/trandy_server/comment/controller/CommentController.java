@@ -23,7 +23,7 @@ import org.trandy.trandy_server.common.jwt.UserDetailsImpl;
 public class CommentController {
     private final CommentService commentService;
 
-    @Operation(summary = "투표 댓글 등록", description = "투표 게시물에 대한 투표 1개 생성")
+    @Operation(summary = "게시물에 투표 등록", description = "투표 게시물에 대한 투표 1개 생성")
     @ApiResponse(responseCode = "200", description = "SUCCESSED")
     @PostMapping(value = "/registerVoteComment")
     public ResponseEntity<ResponseDto> registerVoteComment(@RequestBody @Valid RegisterCommentRequest request,
