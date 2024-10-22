@@ -57,9 +57,9 @@ public class QueryPostRepositoryImpl implements QueryPostRepository {
     public List<PostByCategoryResponse> retrieveVoteListByCategory(long categoryId, long memberId) {
         List<PostByCategoryResponse> posts = jpaQueryFactory
                 .select(Projections.constructor(PostByCategoryResponse.class,
-                        post.id,
-                        post.voteCount,
-                        member.nickname,
+                        post.id.as("postId"),
+                        post.voteCount.as("voteCount"),
+                        member.nickname.as("nickname"),
                         new CaseBuilder()
                                 .when(voteComment.member.id.isNotNull())
                                 .then(true)
@@ -78,6 +78,7 @@ public class QueryPostRepositoryImpl implements QueryPostRepository {
                 .leftJoin(member)
                 .on(post.member.id.eq(member.id)
                         .and(voteComment.member.id.eq(memberId)))
+                .where(post.category.id.eq(categoryId))
                 .fetch();
 
         return posts;
