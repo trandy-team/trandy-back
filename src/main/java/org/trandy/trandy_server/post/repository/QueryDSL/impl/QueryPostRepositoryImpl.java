@@ -16,6 +16,7 @@ import org.trandy.trandy_server.post.domain.dto.response.TrendingPostResponse;
 import org.trandy.trandy_server.post.repository.QueryDSL.QueryPostRepository;
 import org.trandy.trandy_server.report.domain.QReport;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -53,34 +54,36 @@ public class QueryPostRepositoryImpl implements QueryPostRepository {
         return posts;
     }
 
-    @Override
-    public List<PostByCategoryResponse> retrieveVoteListByCategory(long categoryId, long memberId) {
-        List<PostByCategoryResponse> posts = jpaQueryFactory
-                .select(Projections.constructor(PostByCategoryResponse.class,
-                        post.id.as("postId"),
-                        post.voteCount.as("voteCount"),
-                        member.nickname.as("nickname"),
-                        new CaseBuilder()
-                                .when(voteComment.member.id.isNotNull())
-                                .then(true)
-                                .otherwise(false).as("hasVoted"),
-                        Expressions.stringTemplate(
-                                "DATE_FORMAT(TIMEDIFF(DATE_ADD({0}, INTERVAL 3 DAY), NOW()), '%H:%i:%s')",
-                                post.createdAt
-                        ).as("voteDeadline"),
-                        Expressions.stringTemplate(
-                                "DATE_FORMAT({0}, '%Y.%m.%d')", post.createdAt
-                        ).as("createdAt")
-                ))
-                .from(post)
-                .leftJoin(voteComment)
-                .on(post.id.eq(voteComment.post.id))
-                .leftJoin(member)
-                .on(post.member.id.eq(member.id)
-                        .and(voteComment.member.id.eq(memberId)))
-                .where(post.category.id.eq(categoryId))
-                .fetch();
-
-        return posts;
-    }
+//    @Override
+//    public List<PostByCategoryResponse> retrieveVoteListByCategory(long categoryId, int memberId) {
+//        LocalDateTime voteDeadline = LocalDateTime.now().plusDays(3);
+//        List<PostByCategoryResponse> posts = jpaQueryFactory
+//                .select(Projections.constructor(
+//                        PostByCategoryResponse.class,
+//                        post.id.as("postId"),
+//                        post.voteCount.as("voteCount"),
+//                        member.nickname.as("nickname"),
+//                        new CaseBuilder()
+//                                .when(voteComment.member.id.isNotNull())
+//                                .then(true)
+//                                .otherwise(false).as("hasVoted"),
+//                        Expressions.stringTemplate(
+//                                "DATE_FORMAT(TIMEDIFF(DATE_ADD({0}, INTERVAL 3 DAY), NOW()), '%H:%i:%s')",
+//                                post.createdAt
+//                        ).as("voteDeadline"),
+//                        Expressions.stringTemplate(
+//                                "DATE_FORMAT({0}, '%Y.%m.%d')", post.createdAt
+//                        ).as("createdAt")
+//                ))
+//                .from(post)
+//                .leftJoin(voteComment)
+//                .on(post.id.eq(voteComment.post.id))
+//                .leftJoin(member)
+//                .on(post.member.id.eq(member.id)
+//                        .and(voteComment.member.id.eq(memberId)))
+//                .where(post.category.id.eq(categoryId))
+//                .fetch();
+//
+//        return posts;
+//    }
 }

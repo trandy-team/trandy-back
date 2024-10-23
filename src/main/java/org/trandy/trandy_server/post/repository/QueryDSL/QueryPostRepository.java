@@ -10,5 +10,4 @@ public interface QueryPostRepository {
 
     List<TrendingPostResponse> retrieveTrendingPostList();
 
-    List<PostByCategoryResponse> retrieveVoteListByCategory(long categoryId, long memberId);
 }
