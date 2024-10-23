@@ -12,6 +12,10 @@ public class PostConverter {
         List<PostByCategoryResponse> result = new ArrayList<>();
 
         for (Object[] post : postList) {
+            if(post[1] == null){
+                continue;
+            }
+
             result.add(PostByCategoryResponse.builder()
                     .postId(Long.parseLong(post[0].toString()))
                     .voteCount(Integer.parseInt(post[1].toString()))
