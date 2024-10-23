@@ -15,11 +15,13 @@ import org.trandy.trandy_server.member.domain.Member;
 import org.trandy.trandy_server.member.service.MemberService;
 import org.trandy.trandy_server.post.domain.Post;
 import org.trandy.trandy_server.post.domain.VoteStatus;
+import org.trandy.trandy_server.post.domain.converter.PostConverter;
 import org.trandy.trandy_server.post.domain.dto.request.EnrollVoteRequest;
 import org.trandy.trandy_server.post.domain.dto.response.PostByCategoryResponse;
 import org.trandy.trandy_server.post.repository.PostRepository;
 import org.trandy.trandy_server.util.S3Util;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -29,6 +31,7 @@ public class PostService {
     private final MemberService memberService;
     private final CategoryService categoryService;
     private final ImageService imageService;
+    private final PostConverter postConverter;
     private final S3Util s3Util;
 
     @Transactional
@@ -69,9 +72,17 @@ public class PostService {
 
     @Transactional(readOnly = true)
     public ResponseDto retrieveVoteListByCategory(long categoryId, int memberId) {
-        List<PostByCategoryResponse> postList = postRepository.retrieveVoteListByCategory(categoryId, memberId);
+        List<Object[]> postList = postRepository.retrieveVoteListByCategory(categoryId, memberId);
 
-        return ResponseDto.success(postList);
+        List<PostByCategoryResponse> responses;
+
+        if(!postList.isEmpty()){
+            responses = postConverter.objectToDto(postList);
+        }else{
+            throw new CustomException(ExceptionStatus.DataNotFoundException);
+        }
+
+        return ResponseDto.success(responses);
     }
 
     @Transactional(readOnly = true)

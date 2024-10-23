@@ -29,5 +29,5 @@ public interface PostRepository extends JpaRepository<Post, Long>, QueryPostRepo
                     "ON p.member_id = m.id " +
                     "AND c.member_id = :memberId " +
             "WHERE p.category_id = :categoryId", nativeQuery = true)
-    List<PostByCategoryResponse> retrieveVoteListByCategory(long categoryId, int memberId);
+    List<Object[]> retrieveVoteListByCategory(long categoryId, int memberId);
 }
