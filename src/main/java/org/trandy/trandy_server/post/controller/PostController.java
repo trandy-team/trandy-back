@@ -38,7 +38,7 @@ public class PostController {
     @Operation(summary = "[카테고리 선택 이후 화면] 카테고리별 투표 게시물 전체 조회", description = "카테고리별 투표 게시물 전체 조회")
     @ApiResponse(responseCode = "200", description = "SUCCESSED")
     @GetMapping(value = "/retrieveVoteListByCategory")
-    public ResponseEntity<ResponseDto> retrieveVoteListByCategory(@Parameter(description = "Category Id", example = "2") @RequestParam long categoryId,
+    public ResponseEntity<ResponseDto> retrieveVoteListByCategory(@Parameter(description = "Category 고유키", example = "3") @RequestParam long categoryId,
                                                         @Parameter(hidden = true) @AuthenticationPrincipal UserDetailsImpl userDetails){
 
 //        postService.retrieveVoteListByCategory(request, userDetails.getMember());

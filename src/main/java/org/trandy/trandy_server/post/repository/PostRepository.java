@@ -28,6 +28,7 @@ public interface PostRepository extends JpaRepository<Post, Long>, QueryPostRepo
             "   LEFT JOIN member m " +
                     "ON p.member_id = m.id " +
                     "AND c.member_id = :memberId " +
-            "WHERE p.category_id = :categoryId", nativeQuery = true)
+            "WHERE p.category_id = :categoryId" +
+            "ORDER BY p.created_at DESC", nativeQuery = true)
     List<Object[]> retrieveVoteListByCategory(long categoryId, int memberId);
 }

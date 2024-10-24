@@ -49,6 +49,7 @@ public class QueryPostRepositoryImpl implements QueryPostRepository {
                 .from(post)
                 .where(post.voteResult.eq(VoteResult.TRENDING),
                         post.deleted.isFalse())
+                .orderBy(post.createdAt.desc())
                 .fetch();
 
         return posts;

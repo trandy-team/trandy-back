@@ -7,10 +7,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.trandy.trandy_server.comment.domain.request.RegisterCommentRequest;
 import org.trandy.trandy_server.comment.service.CommentService;
 import org.trandy.trandy_server.common.Constants;
@@ -35,5 +32,14 @@ public class CommentController {
         commentService.registerVoteComment(request, 2);
 
         return ResponseEntity.ok(ResponseDto.success(Constants.API_RESPONSE_SUCCESSED));
+    }
+
+    @Operation(summary = "[게시물 상세] 게시물 내 투표 댓글 조회", description = "게시물 내 댓글 List 조회")
+    @ApiResponse(responseCode = "200", description = "SUCCESSED")
+    @GetMapping(value = "/retrieveVoteCommentList")
+    public ResponseEntity<ResponseDto> retrieveVoteCommentList(@RequestParam @Parameter(description = "게시물 고유키", example = "1") long postId,
+                                                               @Parameter(hidden = true) @AuthenticationPrincipal UserDetailsImpl userDetails){
+
+        return ResponseEntity.ok(commentService.retrieveVoteCommentList(postId, 2));
     }
 }

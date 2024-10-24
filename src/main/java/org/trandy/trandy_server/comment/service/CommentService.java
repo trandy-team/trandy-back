@@ -51,4 +51,11 @@ public class CommentService {
 
         return ResponseDto.success(Constants.API_RESPONSE_SUCCESSED);
     }
+
+    @Transactional(readOnly = true)
+    public ResponseDto retrieveVoteCommentList(long postId, long memberId) {
+
+
+        return ResponseDto.success(Constants.API_RESPONSE_SUCCESSED);
+    }
 }
