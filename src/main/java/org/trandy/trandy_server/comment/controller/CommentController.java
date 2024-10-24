@@ -37,9 +37,8 @@ public class CommentController {
     @Operation(summary = "[게시물 상세] 게시물 내 투표 댓글 조회", description = "게시물 내 댓글 List 조회")
     @ApiResponse(responseCode = "200", description = "SUCCESSED")
     @GetMapping(value = "/retrieveVoteCommentList")
-    public ResponseEntity<ResponseDto> retrieveVoteCommentList(@RequestParam @Parameter(description = "게시물 고유키", example = "1") long postId,
-                                                               @Parameter(hidden = true) @AuthenticationPrincipal UserDetailsImpl userDetails){
+    public ResponseEntity<ResponseDto> retrieveVoteCommentList(@RequestParam @Parameter(description = "게시물 고유키", example = "1") long postId){
 
-        return ResponseEntity.ok(commentService.retrieveVoteCommentList(postId, 2));
+        return ResponseEntity.ok(commentService.retrieveVoteCommentList(postId));
     }
 }
