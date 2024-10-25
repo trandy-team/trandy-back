@@ -7,7 +7,7 @@ import lombok.Getter;
 @Builder
 @AllArgsConstructor
 @Getter
-public class CommentByPostIdResponse {
+public class CommentByIdResponse {
     private Long commentId;
     private String contents;
     private String votePosition;

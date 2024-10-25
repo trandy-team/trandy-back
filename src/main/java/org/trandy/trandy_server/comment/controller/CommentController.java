@@ -41,4 +41,14 @@ public class CommentController {
 
         return ResponseEntity.ok(commentService.retrieveVoteCommentList(postId));
     }
+
+    @Operation(summary = "[마이페이지] 내가 작성한 댓글 조회", description = "내가 작성한 댓글 List조회")
+    @ApiResponse(responseCode = "200", description = "SUCCESSED")
+    @GetMapping(value = "/retrieveVoteCommentListByMemberId")
+    public ResponseEntity<ResponseDto> retrieveVoteCommentListByMemberId(@Parameter(hidden = true) @AuthenticationPrincipal UserDetailsImpl userDetails){
+
+//        commentService.retrieveVoteCommentListByMemberId(userDetails.getMember().getId());
+
+        return ResponseEntity.ok(commentService.retrieveVoteCommentListByMemberId(2));
+    }
 }
