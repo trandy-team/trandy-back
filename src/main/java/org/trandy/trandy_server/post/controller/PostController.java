@@ -53,4 +53,14 @@ public class PostController {
 
         return ResponseEntity.ok(postService.retrieveTrendingPostList());
     }
+
+    @Operation(summary = "[마이페이지] 내가 작성한 게시물 List", description = "내가 작성한 게시물 List 조회")
+    @ApiResponse(responseCode = "200", description = "SUCCESSED")
+    @GetMapping(value = "/retrievePostListByMemberId")
+    public ResponseEntity<ResponseDto> retrievePostListByMemberId(@Parameter(hidden = true) @AuthenticationPrincipal UserDetailsImpl userDetails){
+
+//        postService.retrievePostListByMemberId(userDetails.getMember().getId());
+
+        return ResponseEntity.ok(postService.retrievePostListByMemberId(2));
+    }
 }

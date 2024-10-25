@@ -18,6 +18,7 @@ import org.trandy.trandy_server.post.domain.VoteStatus;
 import org.trandy.trandy_server.post.domain.converter.PostConverter;
 import org.trandy.trandy_server.post.domain.dto.request.EnrollVoteRequest;
 import org.trandy.trandy_server.post.domain.dto.response.PostByCategoryResponse;
+import org.trandy.trandy_server.post.domain.dto.response.PostByMemberIdResponse;
 import org.trandy.trandy_server.post.repository.PostRepository;
 import org.trandy.trandy_server.util.S3Util;
 
@@ -96,9 +97,21 @@ public class PostService {
         return post;
     }
 
+    @Transactional(readOnly = true)
+    public ResponseDto retrievePostListByMemberId(long memberId) {
+        List<PostByMemberIdResponse> responses = postRepository.retrievePostListByMemberId(memberId);
+
+        if(!responses.isEmpty()){
+            return ResponseDto.success(responses);
+        }else {
+            throw new CustomException(ExceptionStatus.DataNotFoundException);
+        }
+    }
+
     public void increaseVoteCount(Post post){
         post.increaseVoteCount();
 
         postRepository.save(post);
     }
+
 }

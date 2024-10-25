@@ -12,6 +12,7 @@ import org.trandy.trandy_server.post.domain.Post;
 import org.trandy.trandy_server.post.domain.QPost;
 import org.trandy.trandy_server.post.domain.VoteResult;
 import org.trandy.trandy_server.post.domain.dto.response.PostByCategoryResponse;
+import org.trandy.trandy_server.post.domain.dto.response.PostByMemberIdResponse;
 import org.trandy.trandy_server.post.domain.dto.response.TrendingPostResponse;
 import org.trandy.trandy_server.post.repository.QueryDSL.QueryPostRepository;
 import org.trandy.trandy_server.report.domain.QReport;
@@ -48,6 +49,24 @@ public class QueryPostRepositoryImpl implements QueryPostRepository {
                 ))
                 .from(post)
                 .where(post.voteResult.eq(VoteResult.TRENDING),
+                        post.deleted.isFalse())
+                .orderBy(post.createdAt.desc())
+                .fetch();
+
+        return posts;
+    }
+
+    @Override
+    public List<PostByMemberIdResponse> retrievePostListByMemberId(long memberId) {
+        List<PostByMemberIdResponse> posts = jpaQueryFactory
+                .select(Projections.constructor(
+                        PostByMemberIdResponse.class,
+                        post.id.as("postId"),
+                        post.title,
+                        post.category.categoryName.as("categoryName")
+                ))
+                .from(post)
+                .where(post.member.id.eq(memberId),
                         post.deleted.isFalse())
                 .orderBy(post.createdAt.desc())
                 .fetch();
