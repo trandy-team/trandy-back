@@ -91,12 +91,6 @@ public class PostService {
         return ResponseDto.success(postRepository.retrieveTrendingPostList());
     }
 
-    public Post retrievePostById(long postId){
-        Post post = postRepository.findById(postId).orElseThrow(
-                () -> new CustomException(ExceptionStatus.DataNotFoundException));
-        return post;
-    }
-
     @Transactional(readOnly = true)
     public ResponseDto retrievePostListByMemberId(long memberId) {
         List<PostByMemberIdResponse> responses = postRepository.retrievePostListByMemberId(memberId);
@@ -108,10 +102,17 @@ public class PostService {
         }
     }
 
+    public Post retrievePostById(long postId){
+        Post post = postRepository.findById(postId).orElseThrow(
+                () -> new CustomException(ExceptionStatus.DataNotFoundException));
+        return post;
+    }
+
     public void increaseVoteCount(Post post){
         post.increaseVoteCount();
 
         postRepository.save(post);
     }
+
 
 }

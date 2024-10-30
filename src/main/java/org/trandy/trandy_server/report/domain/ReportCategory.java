@@ -7,7 +7,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum ReportCategory {
 
-    VIOLATION_INAPPROPRIATE_NAME("VIOLATION_INAPPROPRIATE_NAME", "부적절한 이름 사용");
+    VIOLATION_INAPPROPRIATE_NAME("VIOLATION_INAPPROPRIATE_NAME", "부적절한 이름 사용"),
+    PORNOGRAPHIC_POSTS("PORNOGRAPHIC_POSTS", "음란성 게시물");
 
     private final String categoryName;
     private final String desc;
