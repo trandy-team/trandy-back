@@ -37,7 +37,7 @@ public class CommentController {
 
     @Operation(summary = "내 투표에 대한 댓글 업데이트", description = "내 투표에 대한 댓글 업데이트")
     @ApiResponse(responseCode = "200", description = "SUCCESSED")
-    @PostMapping(value = "/registerVoteComment")
+    @PostMapping(value = "/updateVoteComment")
     public ResponseEntity<ResponseDto> updateVoteComment(@RequestBody @Valid UpdateCommentRequest request,
                                                            @Parameter(hidden = true) @AuthenticationPrincipal UserDetailsImpl userDetails){
 
