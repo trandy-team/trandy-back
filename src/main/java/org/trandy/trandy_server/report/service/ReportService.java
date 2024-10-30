@@ -2,7 +2,6 @@ package org.trandy.trandy_server.report.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.trandy.trandy_server.comment.domain.VotePosition;
 import org.trandy.trandy_server.common.Constants;
 import org.trandy.trandy_server.common.ResponseDto;
 import org.trandy.trandy_server.member.domain.Member;

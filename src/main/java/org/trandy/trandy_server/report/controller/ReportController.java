@@ -6,11 +6,9 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.trandy.trandy_server.comment.domain.request.RegisterCommentRequest;
 import org.trandy.trandy_server.common.Constants;
 import org.trandy.trandy_server.common.ResponseDto;
@@ -34,6 +32,21 @@ public class ReportController {
 
         // 로그인 구현 전 개발용
         reportService.registerReport(request, 2);
+
+        return ResponseEntity.ok(ResponseDto.success(Constants.API_RESPONSE_SUCCESSED));
+    }
+
+    @Operation(summary = "[Admin] 신고 건 업데이트", description = "신고된 건에 대한 승인 / 거절")
+    @ApiResponse(responseCode = "200", description = "SUCCESSED")
+    @PostMapping(value = "/updateReport")
+    @Secured("ADMIN")
+    public ResponseEntity<ResponseDto> updateReport(@RequestParam long reportId,
+                                                      @Parameter(hidden = true) @AuthenticationPrincipal UserDetailsImpl userDetails){
+
+//        reportService.registerReport(request, userDetails.getMember());
+
+        // 로그인 구현 전 개발용
+//        reportService.updateReport(request, 2);
 
         return ResponseEntity.ok(ResponseDto.success(Constants.API_RESPONSE_SUCCESSED));
     }

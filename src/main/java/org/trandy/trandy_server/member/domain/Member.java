@@ -8,6 +8,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.trandy.trandy_server.post.domain.Post;
+import org.trandy.trandy_server.report.domain.Report;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -48,9 +49,9 @@ public class Member extends BaseTimeEntity {
     @Builder.Default
     private List<Post> posts = new ArrayList<>();
 
-    @OneToMany(mappedBy = "report")
+    @OneToMany(mappedBy = "member")
     @Builder.Default
-    private List<Post> reports = new ArrayList<>();
+    private List<Report> reports = new ArrayList<>();
 
     @Column(nullable = false)
     @Builder.Default
