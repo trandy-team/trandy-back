@@ -7,6 +7,7 @@ import org.trandy.trandy_server.comment.domain.VoteComment;
 import org.trandy.trandy_server.comment.domain.VotePosition;
 import org.trandy.trandy_server.comment.domain.converter.CommentConverter;
 import org.trandy.trandy_server.comment.domain.request.RegisterCommentRequest;
+import org.trandy.trandy_server.comment.domain.request.UpdateCommentRequest;
 import org.trandy.trandy_server.comment.domain.response.CommentByIdResponse;
 import org.trandy.trandy_server.comment.repository.CommentRepository;
 import org.trandy.trandy_server.common.Constants;
@@ -38,7 +39,7 @@ public class CommentService {
 
         // 이미 투표를 진행한 회원인지 확인
         commentRepository.findByPostIdAndMemberId(post.getId(), member.getId()).ifPresent(comment -> {
-                    throw new CustomException(ExceptionStatus.CommentAlreadyResisteredException);
+                    throw new CustomException(ExceptionStatus.VoteAlreadyResisteredException);
                 });
 
         commentRepository.save(VoteComment.builder()
@@ -46,7 +47,6 @@ public class CommentService {
                                 ? VotePosition.AGREE
                                 : VotePosition.DISAGREE
                         )
-                        .contents(request.getContents())
                         .member(member)
                         .post(post)
                 .build());
@@ -57,9 +57,25 @@ public class CommentService {
         return ResponseDto.success(Constants.API_RESPONSE_SUCCESSED);
     }
 
+    @Transactional
+    public ResponseDto updateVoteComment(UpdateCommentRequest request, int memberId) {
+        VoteComment comment = commentRepository.findByPostIdAndMemberId(request.getPostId(), memberId).orElseThrow(
+                () -> new CustomException(ExceptionStatus.DataNotFoundException));
+
+        if(comment.getContents() != null && comment.getContents().isEmpty()){
+            throw new CustomException(ExceptionStatus.CommentAlreadyResisteredException);
+        }
+
+        comment.updateComment(request.getContents());
+
+        commentRepository.save(comment);
+
+        return ResponseDto.success(Constants.API_RESPONSE_SUCCESSED);
+    }
+
     @Transactional(readOnly = true)
     public ResponseDto retrieveVoteCommentList(long postId) {
-        List<VoteComment> comments = commentRepository.findByPostId(postId);
+        List<VoteComment> comments = commentRepository.findByPostIdAndContentsIsNotNullAndContentsNot(postId, "");
         List<CommentByIdResponse> responses;
 
         if(!comments.isEmpty()){

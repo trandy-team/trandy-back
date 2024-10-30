@@ -11,7 +11,7 @@ import java.util.Optional;
 public interface CommentRepository extends JpaRepository<VoteComment, Long> {
     Optional<VoteComment> findByPostIdAndMemberId(long postId, long memberId);
 
-    List<VoteComment> findByPostId(long postId);
+    List<VoteComment> findByPostIdAndContentsIsNotNullAndContentsNot(long postId, String emptyString);
 
     List<VoteComment> findByMemberId(long memberId);
 }

@@ -32,7 +32,8 @@ public enum ExceptionStatus {
     CategoryNameIsDuplicatedException("CategoryNameIsDuplicatedException", HttpStatus.BAD_REQUEST, "이미 존재하는 카테고리 입니다. (삭제된 카테고리 포함)"),
 
     // Comment
-    CommentAlreadyResisteredException("CommentAlreadyResisteredException", HttpStatus.BAD_REQUEST, "이미 투표를 진행한 회원입니다."),
+    VoteAlreadyResisteredException("VoteAlreadyResisteredException", HttpStatus.BAD_REQUEST, "이미 투표를 진행한 회원입니다."),
+    CommentAlreadyResisteredException("CommentAlreadyResisteredException", HttpStatus.BAD_REQUEST, "이미 댓글을 입력하였습니다."),
 
     // DB
     DataNotFoundException("DataNotFoundException", HttpStatus.BAD_REQUEST, "데이터가 존재하지 않습니다."),

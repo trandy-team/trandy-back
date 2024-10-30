@@ -18,7 +18,7 @@ public class VoteComment extends BaseTimeEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, columnDefinition = "TEXT")
+    @Column(columnDefinition = "TEXT")
     private String contents;
 
     @Column(nullable = false)
@@ -32,4 +32,8 @@ public class VoteComment extends BaseTimeEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
+
+    public void updateComment(String contents) {
+        this.contents = contents;
+    }
 }

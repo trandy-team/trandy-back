@@ -9,6 +9,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public class PostByMemberIdResponse {
     private long postId;
+    private String imageUrl;
     private String title;
     private String categoryName;
 }
