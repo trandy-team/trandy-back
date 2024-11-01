@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import org.trandy.trandy_server.common.BaseTimeEntity;
 import org.trandy.trandy_server.member.domain.Member;
 import org.trandy.trandy_server.post.domain.Post;
+import org.trandy.trandy_server.report.domain.request.UpdateReportRequest;
 
 @Entity
 @NoArgsConstructor
@@ -37,7 +38,17 @@ public class Report extends BaseTimeEntity {
     private Post post;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id")
-    private Member member;
+    @JoinColumn(name = "reporter_id")
+    private Member reporter;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "approver_id")
+    private Member approver;
+
+    public void updateReviewComment(UpdateReportRequest request, Member member) {
+        this.reportStatus = request.getReportStatus().equals(ReportStatus.APPROVED.getStatus())
+                ? ReportStatus.APPROVED : ReportStatus.REJECTED;
+        this.reportReviewComment = request.getReportReviewComment();
+        this.reporter = member;
+    }
 }

@@ -14,6 +14,7 @@ import org.trandy.trandy_server.common.Constants;
 import org.trandy.trandy_server.common.ResponseDto;
 import org.trandy.trandy_server.common.jwt.UserDetailsImpl;
 import org.trandy.trandy_server.report.domain.request.RegisterReportRequest;
+import org.trandy.trandy_server.report.domain.request.UpdateReportRequest;
 import org.trandy.trandy_server.report.service.ReportService;
 
 @RestController
@@ -40,13 +41,13 @@ public class ReportController {
     @ApiResponse(responseCode = "200", description = "SUCCESSED")
     @PostMapping(value = "/updateReport")
     @Secured("ADMIN")
-    public ResponseEntity<ResponseDto> updateReport(@RequestParam long reportId,
+    public ResponseEntity<ResponseDto> updateReport(@RequestBody @Valid UpdateReportRequest request,
                                                       @Parameter(hidden = true) @AuthenticationPrincipal UserDetailsImpl userDetails){
 
-//        reportService.registerReport(request, userDetails.getMember());
+//        reportService.updateReport(request, userDetails.getMember());
 
         // 로그인 구현 전 개발용
-//        reportService.updateReport(request, 2);
+        reportService.updateReport(request, 2);
 
         return ResponseEntity.ok(ResponseDto.success(Constants.API_RESPONSE_SUCCESSED));
     }

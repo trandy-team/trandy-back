@@ -49,9 +49,13 @@ public class Member extends BaseTimeEntity {
     @Builder.Default
     private List<Post> posts = new ArrayList<>();
 
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "reporter")
     @Builder.Default
-    private List<Report> reports = new ArrayList<>();
+    private List<Report> reportsAsReporter = new ArrayList<>();
+
+    @OneToMany(mappedBy = "approver")
+    @Builder.Default
+    private List<Report> reportsAsApprover = new ArrayList<>();
 
     @Column(nullable = false)
     @Builder.Default
