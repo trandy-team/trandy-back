@@ -1,6 +1,7 @@
 package org.trandy.trandy_server.report.domain.request;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import org.trandy.trandy_server.report.domain.ReportCategory;
 
@@ -14,5 +15,6 @@ public class RegisterReportRequest {
     private ReportCategory reportCategory;
 
     @Schema(description = "신고 내용", example = "부적절한 이름을 사용하였습니다.")
+    @NotNull
     private String contents;
 }

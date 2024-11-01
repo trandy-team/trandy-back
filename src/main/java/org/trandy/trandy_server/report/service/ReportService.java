@@ -34,8 +34,8 @@ public class ReportService {
         reportRepository.save(Report.builder()
                 .reportStatus(ReportStatus.PENDING)
                 .reportCategory(request.getReportCategory())
-                        .reporter(member)
-                        .contents(request.getContents())
+                .reporter(member)
+                .contents(request.getContents())
                 .build());
 
         return ResponseDto.success(Constants.API_RESPONSE_SUCCESSED);

@@ -30,7 +30,7 @@ public class Report extends BaseTimeEntity {
     @Column(nullable = false, columnDefinition = "TEXT")
     private String contents;
 
-    @Column(nullable = false, columnDefinition = "TEXT")
+    @Column(columnDefinition = "TEXT")
     private String reportReviewComment;
 
     @ManyToOne(fetch = FetchType.LAZY)
