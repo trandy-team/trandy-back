@@ -33,10 +33,7 @@ public class ReportService {
 
         reportRepository.save(Report.builder()
                 .reportStatus(ReportStatus.PENDING)
-                .reportCategory(request.getReportCategory().equals(ReportCategory.VIOLATION_INAPPROPRIATE_NAME.getDesc())
-                        ? ReportCategory.VIOLATION_INAPPROPRIATE_NAME
-                        : ReportCategory.PORNOGRAPHIC_POSTS
-                )
+                .reportCategory(request.getReportCategory())
                 .build());
 
         return ResponseDto.success(Constants.API_RESPONSE_SUCCESSED);

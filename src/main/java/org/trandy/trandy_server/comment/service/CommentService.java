@@ -43,10 +43,7 @@ public class CommentService {
                 });
 
         commentRepository.save(VoteComment.builder()
-                        .votePosition(request.getVotePosition().equals(VotePosition.AGREE.getDesc())
-                                ? VotePosition.AGREE
-                                : VotePosition.DISAGREE
-                        )
+                        .votePosition(request.getVotePosition())
                         .member(member)
                         .post(post)
                 .build());

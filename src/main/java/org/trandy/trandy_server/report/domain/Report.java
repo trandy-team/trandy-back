@@ -46,8 +46,7 @@ public class Report extends BaseTimeEntity {
     private Member approver;
 
     public void updateReviewComment(UpdateReportRequest request, Member member) {
-        this.reportStatus = request.getReportStatus().equals(ReportStatus.APPROVED.getStatus())
-                ? ReportStatus.APPROVED : ReportStatus.REJECTED;
+        this.reportStatus = request.getReportStatus();
         this.reportReviewComment = request.getReportReviewComment();
         this.reporter = member;
     }

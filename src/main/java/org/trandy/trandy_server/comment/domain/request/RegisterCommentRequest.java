@@ -3,6 +3,7 @@ package org.trandy.trandy_server.comment.domain.request;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
+import org.trandy.trandy_server.comment.domain.VotePosition;
 
 @Getter
 public class RegisterCommentRequest {
@@ -11,6 +12,6 @@ public class RegisterCommentRequest {
     private long postId;
 
     @NotNull
-    @Schema(description = "찬성 / 반대", example = "AGREE / DISAGREE")
-    private String votePosition;
+    @Schema(description = "찬성 / 반대", example = "DISAGREE", allowableValues = "AGREE, DISAGREE")
+    private VotePosition votePosition;
 }

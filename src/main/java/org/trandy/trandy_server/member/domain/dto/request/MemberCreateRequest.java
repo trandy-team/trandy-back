@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
+import org.trandy.trandy_server.member.domain.Role;
 
 @Getter
 public class MemberCreateRequest {
@@ -30,9 +31,9 @@ public class MemberCreateRequest {
     @NotNull
     private String nickname;
 
-    @Schema(description = "권한", example = "ADMIN / USER")
+    @Schema(description = "권한", example = "ADMIN", allowableValues = "ADMIN, USER")
     @Pattern(regexp = "^(ADMIN|USER)$", message = "ADMIN 혹은 USER 로 입력하세요")
     @NotNull
-    private String memberRole;
+    private Role memberRole;
 
 }
