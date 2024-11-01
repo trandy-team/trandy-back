@@ -7,6 +7,7 @@ import org.trandy.trandy_server.common.ResponseDto;
 import org.trandy.trandy_server.exception.CustomException;
 import org.trandy.trandy_server.exception.ExceptionStatus;
 import org.trandy.trandy_server.member.domain.Member;
+import org.trandy.trandy_server.member.domain.Role;
 import org.trandy.trandy_server.member.service.MemberService;
 import org.trandy.trandy_server.post.domain.Post;
 import org.trandy.trandy_server.post.service.PostService;
@@ -33,6 +34,8 @@ public class ReportService {
         reportRepository.save(Report.builder()
                 .reportStatus(ReportStatus.PENDING)
                 .reportCategory(request.getReportCategory())
+                        .reporter(member)
+                        .contents(request.getContents())
                 .build());
 
         return ResponseDto.success(Constants.API_RESPONSE_SUCCESSED);
@@ -48,6 +51,22 @@ public class ReportService {
         report.updateReviewComment(request, member);
 
         reportRepository.save(report);
+
+        return ResponseDto.success(Constants.API_RESPONSE_SUCCESSED);
+    }
+
+    public ResponseDto deleteReport(long reportId, int memberId) {
+        // 멤버 객체 영속화 (개발용)
+        Member member = memberService.retrieveMemberMockData(memberId);
+
+        Report report = reportRepository.findById(reportId).orElseThrow(
+                () -> new CustomException(ExceptionStatus.DataNotFoundException));
+
+        // 작성자와 이름이 같거나, 권한이 ADMIN인 경우 삭제 가능
+        if(report.getReporter().getId() == member.getId()
+                || member.getMemberRole().getRole().equals(Role.ADMIN.getRole())){
+            reportRepository.deleteById(reportId);
+        }
 
         return ResponseDto.success(Constants.API_RESPONSE_SUCCESSED);
     }

@@ -37,6 +37,20 @@ public class ReportController {
         return ResponseEntity.ok(ResponseDto.success(Constants.API_RESPONSE_SUCCESSED));
     }
 
+    @Operation(summary = "신고 글 삭제", description = "신고글 작성자거나, 유저 권한이 ADMIN 인 경우 신고글 삭제")
+    @ApiResponse(responseCode = "200", description = "SUCCESSED")
+    @PostMapping(value = "/deleteReport")
+    public ResponseEntity<ResponseDto> deleteReport(@RequestParam long reportId,
+                                                      @Parameter(hidden = true) @AuthenticationPrincipal UserDetailsImpl userDetails){
+
+//        reportService.deleteReport(request, userDetails.getMember());
+
+        // 로그인 구현 전 개발용
+        reportService.deleteReport(reportId, 2);
+
+        return ResponseEntity.ok(ResponseDto.success(Constants.API_RESPONSE_SUCCESSED));
+    }
+
     @Operation(summary = "[ADMIN] 신고 건 업데이트", description = "신고된 건에 대한 승인 / 거절")
     @ApiResponse(responseCode = "200", description = "SUCCESSED")
     @PostMapping(value = "/updateReport")
