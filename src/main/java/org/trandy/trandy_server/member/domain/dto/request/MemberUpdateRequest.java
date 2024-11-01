@@ -22,7 +22,7 @@ public class MemberUpdateRequest {
     @NotNull
     private String memberName;
 
-    @Schema(description = "권한", example = "USER")
+    @Schema(description = "권한", example = "USER / ADMIN")
     @Pattern(regexp = "^(ADMIN|USER)$", message = "ADMIN 혹은 USER 로 입력하세요")
     @NotNull
     private String memberRole;

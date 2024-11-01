@@ -11,7 +11,6 @@ import org.trandy.trandy_server.member.service.MemberService;
 import org.trandy.trandy_server.post.domain.Post;
 import org.trandy.trandy_server.post.service.PostService;
 import org.trandy.trandy_server.report.domain.Report;
-import org.trandy.trandy_server.report.domain.ReportCategory;
 import org.trandy.trandy_server.report.domain.ReportStatus;
 import org.trandy.trandy_server.report.domain.request.RegisterReportRequest;
 import org.trandy.trandy_server.report.domain.request.UpdateReportRequest;

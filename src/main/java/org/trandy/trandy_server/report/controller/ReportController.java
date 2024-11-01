@@ -37,7 +37,7 @@ public class ReportController {
         return ResponseEntity.ok(ResponseDto.success(Constants.API_RESPONSE_SUCCESSED));
     }
 
-    @Operation(summary = "[Admin] 신고 건 업데이트", description = "신고된 건에 대한 승인 / 거절")
+    @Operation(summary = "[ADMIN] 신고 건 업데이트", description = "신고된 건에 대한 승인 / 거절")
     @ApiResponse(responseCode = "200", description = "SUCCESSED")
     @PostMapping(value = "/updateReport")
     @Secured("ADMIN")

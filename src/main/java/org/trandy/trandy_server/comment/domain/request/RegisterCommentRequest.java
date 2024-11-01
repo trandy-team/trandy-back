@@ -12,6 +12,6 @@ public class RegisterCommentRequest {
     private long postId;
 
     @NotNull
-    @Schema(description = "찬성 / 반대", example = "DISAGREE", allowableValues = "AGREE, DISAGREE")
+    @Schema(description = "찬성 / 반대", example = "AGREE / DISAGREE", allowableValues = "AGREE, DISAGREE")
     private VotePosition votePosition;
 }

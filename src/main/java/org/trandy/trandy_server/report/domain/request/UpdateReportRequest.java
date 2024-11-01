@@ -13,6 +13,6 @@ public class UpdateReportRequest {
     @Schema(description = "신고 코멘트", example = "그정도는 아닌거 같아서 반려합니다.")
     private String reportReviewComment;
 
-    @Schema(description = "신고 승인 여부", example = "APPROVED", allowableValues = "APPROVED, REJECTED")
+    @Schema(description = "신고 승인 여부", example = "APPROVED / REJECTED", allowableValues = "APPROVED, REJECTED")
     private ReportStatus reportStatus;
 }

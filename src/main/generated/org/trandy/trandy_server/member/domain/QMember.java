@@ -48,6 +48,10 @@ public class QMember extends EntityPathBase<Member> {
 
     public final StringPath profileImageUrl = createString("profileImageUrl");
 
+    public final ListPath<org.trandy.trandy_server.report.domain.Report, org.trandy.trandy_server.report.domain.QReport> reportsAsApprover = this.<org.trandy.trandy_server.report.domain.Report, org.trandy.trandy_server.report.domain.QReport>createList("reportsAsApprover", org.trandy.trandy_server.report.domain.Report.class, org.trandy.trandy_server.report.domain.QReport.class, PathInits.DIRECT2);
+
+    public final ListPath<org.trandy.trandy_server.report.domain.Report, org.trandy.trandy_server.report.domain.QReport> reportsAsReporter = this.<org.trandy.trandy_server.report.domain.Report, org.trandy.trandy_server.report.domain.QReport>createList("reportsAsReporter", org.trandy.trandy_server.report.domain.Report.class, org.trandy.trandy_server.report.domain.QReport.class, PathInits.DIRECT2);
+
     public final NumberPath<Long> score = createNumber("score", Long.class);
 
     public QMember(String variable) {

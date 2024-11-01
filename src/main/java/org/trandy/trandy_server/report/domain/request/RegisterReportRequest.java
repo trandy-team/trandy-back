@@ -9,7 +9,7 @@ public class RegisterReportRequest {
     @Schema(description = "게시물 아이디", example = "1")
     private long postId;
 
-    @Schema(description = "신고 카테고리", example = "VIOLATION_INAPPROPRIATE_NAME",
+    @Schema(description = "신고 카테고리", example = "VIOLATION_INAPPROPRIATE_NAME / PORNOGRAPHIC_POSTS",
             allowableValues = "VIOLATION_INAPPROPRIATE_NAME, PORNOGRAPHIC_POSTS")
     private ReportCategory reportCategory;
 
