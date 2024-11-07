@@ -39,7 +39,7 @@ public class ReportController {
 
     @Operation(summary = "신고 글 삭제", description = "신고글 작성자거나, 유저 권한이 ADMIN 인 경우 신고글 삭제")
     @ApiResponse(responseCode = "200", description = "SUCCESSED")
-    @PostMapping(value = "/deleteReport")
+    @DeleteMapping(value = "/deleteReport")
     public ResponseEntity<ResponseDto> deleteReport(@RequestParam long reportId,
                                                       @Parameter(hidden = true) @AuthenticationPrincipal UserDetailsImpl userDetails){
 

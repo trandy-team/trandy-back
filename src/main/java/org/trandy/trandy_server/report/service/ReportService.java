@@ -36,6 +36,7 @@ public class ReportService {
                 .reportCategory(request.getReportCategory())
                 .reporter(member)
                 .contents(request.getContents())
+                .post(post)
                 .build());
 
         return ResponseDto.success(Constants.API_RESPONSE_SUCCESSED);

@@ -170,6 +170,8 @@ public class MemberService {
 
         member.delete(member.getDeleted());
 
+        memberRepository.save(member);
+
         return ResponseDto.success(Constants.API_RESPONSE_SUCCESSED);
     }
 
